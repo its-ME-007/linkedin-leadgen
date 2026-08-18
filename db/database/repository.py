@@ -584,3 +584,66 @@ def delete_expansion_signal(signal_id):
 
     finally:
         conn.close()
+
+# ============================================
+# WEB SOURCES
+# ============================================
+
+def create_web_source(url, source_type=None):
+    conn = get_connection()
+
+    try:
+        cursor = conn.execute(
+            """
+            INSERT INTO web_sources (
+                url,
+                source_type
+            )
+            VALUES (?, ?)
+            """,
+            (
+                url,
+                source_type
+            )
+        )
+
+        conn.commit()
+        return cursor.lastrowid
+
+    finally:
+        conn.close()
+
+
+# ============================================
+# CONTACT EVIDENCE
+# ============================================
+
+def create_contact_evidence(
+    contact_id,
+    source_id,
+    evidence_text=None
+):
+    conn = get_connection()
+
+    try:
+        cursor = conn.execute(
+            """
+            INSERT INTO contact_evidence (
+                contact_id,
+                source_id,
+                evidence_text
+            )
+            VALUES (?, ?, ?)
+            """,
+            (
+                contact_id,
+                source_id,
+                evidence_text
+            )
+        )
+
+        conn.commit()
+        return cursor.lastrowid
+
+    finally:
+        conn.close()
