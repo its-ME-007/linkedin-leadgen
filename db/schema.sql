@@ -1,13 +1,20 @@
 PRAGMA foreign_keys = ON;
 
 
-CREATE TABLE companies (
+-- ============================================
+-- COMPANIES
+-- ============================================
+
+CREATE TABLE IF NOT EXISTS companies (
     company_id INTEGER PRIMARY KEY AUTOINCREMENT,
 
     name TEXT NOT NULL,
     normalized_name TEXT,
     domain TEXT,
 
+    industry TEXT,
+    employee_count INTEGER,
+    revenue TEXT,
     description TEXT,
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -15,7 +22,43 @@ CREATE TABLE companies (
 );
 
 
-CREATE TABLE people (
+-- ============================================
+-- OPPORTUNITY / EXPANSION SIGNALS
+-- ============================================
+
+CREATE TABLE IF NOT EXISTS expansion_signals (
+    signal_id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+    company_id INTEGER,
+
+    signal_type TEXT NOT NULL,
+
+    title TEXT,
+    description TEXT,
+
+    location TEXT,
+
+    source_url TEXT NOT NULL,
+    source_name TEXT,
+
+    author_name TEXT,
+    author_linkedin_url TEXT,
+
+    signal_strength REAL,
+
+    discovered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (company_id)
+        REFERENCES companies(company_id)
+        ON DELETE SET NULL
+);
+
+
+-- ============================================
+-- PEOPLE / DECISION MAKERS
+-- ============================================
+
+CREATE TABLE IF NOT EXISTS people (
     person_id INTEGER PRIMARY KEY AUTOINCREMENT,
 
     full_name TEXT NOT NULL,
@@ -38,7 +81,11 @@ CREATE TABLE people (
 );
 
 
-CREATE TABLE person_company (
+-- ============================================
+-- PERSON ↔ COMPANY RELATIONSHIP
+-- ============================================
+
+CREATE TABLE IF NOT EXISTS person_company (
     person_id INTEGER,
     company_id INTEGER,
 
@@ -62,7 +109,11 @@ CREATE TABLE person_company (
 );
 
 
-CREATE TABLE job_openings (
+-- ============================================
+-- JOB OPENINGS
+-- ============================================
+
+CREATE TABLE IF NOT EXISTS job_openings (
     job_id INTEGER PRIMARY KEY AUTOINCREMENT,
 
     company_id INTEGER,
@@ -87,7 +138,11 @@ CREATE TABLE job_openings (
 );
 
 
-CREATE TABLE contact_points (
+-- ============================================
+-- CONTACT / REACH-OUT POINTS
+-- ============================================
+
+CREATE TABLE IF NOT EXISTS contact_points (
     contact_id INTEGER PRIMARY KEY AUTOINCREMENT,
 
     person_id INTEGER NOT NULL,
@@ -108,7 +163,11 @@ CREATE TABLE contact_points (
 );
 
 
-CREATE TABLE web_sources (
+-- ============================================
+-- WEB SOURCES
+-- ============================================
+
+CREATE TABLE IF NOT EXISTS web_sources (
     source_id INTEGER PRIMARY KEY AUTOINCREMENT,
 
     url TEXT NOT NULL UNIQUE,
@@ -121,7 +180,11 @@ CREATE TABLE web_sources (
 );
 
 
-CREATE TABLE contact_evidence (
+-- ============================================
+-- CONTACT EVIDENCE
+-- ============================================
+
+CREATE TABLE IF NOT EXISTS contact_evidence (
     contact_id INTEGER,
     source_id INTEGER,
 
@@ -141,26 +204,45 @@ CREATE TABLE contact_evidence (
 );
 
 
-CREATE INDEX idx_people_name
+-- ============================================
+-- INDEXES
+-- ============================================
+
+CREATE INDEX IF NOT EXISTS idx_companies_name
+    ON companies(normalized_name);
+
+CREATE INDEX IF NOT EXISTS idx_companies_domain
+    ON companies(domain);
+
+CREATE INDEX IF NOT EXISTS idx_signals_company
+    ON expansion_signals(company_id);
+
+CREATE INDEX IF NOT EXISTS idx_signals_type
+    ON expansion_signals(signal_type);
+
+CREATE INDEX IF NOT EXISTS idx_signals_location
+    ON expansion_signals(location);
+
+CREATE INDEX IF NOT EXISTS idx_people_name
     ON people(normalized_name);
 
-CREATE INDEX idx_people_company
+CREATE INDEX IF NOT EXISTS idx_people_company
     ON people(company_id);
 
-CREATE INDEX idx_people_linkedin
+CREATE INDEX IF NOT EXISTS idx_people_linkedin
     ON people(linkedin_id);
 
-CREATE INDEX idx_jobs_company
+CREATE INDEX IF NOT EXISTS idx_jobs_company
     ON job_openings(company_id);
 
-CREATE INDEX idx_jobs_location
+CREATE INDEX IF NOT EXISTS idx_jobs_location
     ON job_openings(location);
 
-CREATE INDEX idx_jobs_title
+CREATE INDEX IF NOT EXISTS idx_jobs_title
     ON job_openings(title);
 
-CREATE INDEX idx_contacts_person
+CREATE INDEX IF NOT EXISTS idx_contacts_person
     ON contact_points(person_id);
 
-CREATE INDEX idx_contacts_type
+CREATE INDEX IF NOT EXISTS idx_contacts_type
     ON contact_points(contact_type);

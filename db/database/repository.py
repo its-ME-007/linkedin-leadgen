@@ -437,3 +437,150 @@ def delete_contact(contact_id):
 
     finally:
         conn.close()
+
+# ============================================
+# EXPANSION SIGNALS
+# ============================================
+
+def create_expansion_signal(
+    signal_type,
+    source_url,
+    company_id=None,
+    title=None,
+    description=None,
+    location=None,
+    source_name=None,
+    author_name=None,
+    author_linkedin_url=None,
+    signal_strength=None
+):
+    conn = get_connection()
+
+    try:
+        cursor = conn.execute(
+            """
+            INSERT INTO expansion_signals (
+                company_id,
+                signal_type,
+                title,
+                description,
+                location,
+                source_url,
+                source_name,
+                author_name,
+                author_linkedin_url,
+                signal_strength
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                company_id,
+                signal_type,
+                title,
+                description,
+                location,
+                source_url,
+                source_name,
+                author_name,
+                author_linkedin_url,
+                signal_strength
+            )
+        )
+
+        conn.commit()
+        return cursor.lastrowid
+
+    finally:
+        conn.close()
+
+
+def get_expansion_signal(signal_id):
+    conn = get_connection()
+
+    try:
+        return conn.execute(
+            """
+            SELECT *
+            FROM expansion_signals
+            WHERE signal_id = ?
+            """,
+            (signal_id,)
+        ).fetchone()
+
+    finally:
+        conn.close()
+
+
+def get_signals_by_company(company_id):
+    conn = get_connection()
+
+    try:
+        return conn.execute(
+            """
+            SELECT *
+            FROM expansion_signals
+            WHERE company_id = ?
+            ORDER BY signal_strength DESC,
+                     discovered_at DESC
+            """,
+            (company_id,)
+        ).fetchall()
+
+    finally:
+        conn.close()
+
+
+def get_signals_by_location(location):
+    conn = get_connection()
+
+    try:
+        return conn.execute(
+            """
+            SELECT *
+            FROM expansion_signals
+            WHERE location LIKE ?
+            ORDER BY signal_strength DESC,
+                     discovered_at DESC
+            """,
+            (f"%{location}%",)
+        ).fetchall()
+
+    finally:
+        conn.close()
+
+
+def update_signal_company(signal_id, company_id):
+    conn = get_connection()
+
+    try:
+        conn.execute(
+            """
+            UPDATE expansion_signals
+            SET company_id = ?
+            WHERE signal_id = ?
+            """,
+            (company_id, signal_id)
+        )
+
+        conn.commit()
+
+    finally:
+        conn.close()
+
+
+def delete_expansion_signal(signal_id):
+    conn = get_connection()
+
+    try:
+        conn.execute(
+            """
+            DELETE FROM expansion_signals
+            WHERE signal_id = ?
+            """,
+            (signal_id,)
+        )
+
+        conn.commit()
+
+    finally:
+        conn.close()
