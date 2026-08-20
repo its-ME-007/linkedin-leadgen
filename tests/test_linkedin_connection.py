@@ -20,9 +20,12 @@ async def main():
                 "max_pages" : 1
             }
         )
-        print("Search results:")
-        print(result)
+        
+        if result.is_error:
+            raise RuntimeError(str(result.content))
 
+        return result.structured_content
+    
     finally:
         await provider.close()
 

@@ -1,0 +1,120 @@
+{
+    "input_result_count": 20,
+    "retained_signal_count": 7,
+    "qualified_signal_count": 7,
+    "needs_enrichment_count": 0,
+    "signals": [
+        {
+            "signal_type": "office_expansion",
+            "company_name": "SAP",
+            "location": "Bangalore",
+            "intent": "completed",
+            "recency": null,
+            "confidence": 1.0,
+            "status": "qualified",
+            "evidence": {
+                "text": "SAP’s brand-new 2nd R&D (R&B) campus in Bangalore... inaugurated the SAP Labs India Innovation Park in Bengaluru.",
+                "reason": "The post explicitly confirms the inauguration of a new, second campus for SAP in Bangalore."
+            },
+            "source": "linkedin",
+            "source_url": null,
+            "discovery_query": "\"expanding office\" \"Bangalore\" \"technology\""
+        },
+        {
+            "signal_type": "office_expansion",
+            "company_name": "Aptly Technology Corporation",
+            "location": "Bengaluru",
+            "intent": "completed",
+            "recency": null,
+            "confidence": 1.0,
+            "status": "qualified",
+            "evidence": {
+                "text": "Aptly Technology Corporation Expands Its Global Presence with a New Hub in the Silicon Valley of India — Bengaluru! We are excited to announce the launch of our new office in Bengaluru, officially operational from Monday, 8th September 2025.",
+                "reason": "The post clearly announces the launch and operational status of a new office for Aptly Technology Corporation."
+            },
+            "source": "linkedin",
+            "source_url": null,
+            "discovery_query": "\"opening office\" \"Bangalore\" \"technology\""
+        },
+        {
+            "signal_type": "office_expansion",
+            "company_name": "Johnson & Johnson's DePuy Synthes",
+            "location": "Bengaluru",
+            "intent": "planned",
+            "recency": null,
+            "confidence": 0.9,
+            "status": "qualified",
+            "evidence": {
+                "text": "Johnson & Johnson's DePuy Synthes plans to establish a new GCC in Bengaluru",
+                "reason": "The post reports a planned expansion for a specific company in a specific location."
+            },
+            "source": "linkedin",
+            "source_url": null,
+            "discovery_query": "\"new headquarters\" \"Bangalore\" \"technology\""
+        },
+        {
+            "signal_type": "office_expansion",
+            "company_name": "WirelessCar",
+            "location": "Bangalore",
+            "intent": "completed",
+            "recency": null,
+            "confidence": 1.0,
+            "status": "qualified",
+            "evidence": {
+                "text": "WirelessCar, one of the world's leading innovators of digital vehicle services, has opened its first office in Bangalore",
+                "reason": "The post confirms the opening of a new office for WirelessCar in Bangalore."
+            },
+            "source": "linkedin",
+            "source_url": null,
+            "discovery_query": "\"expanding presence\" \"Bangalore\" \"technology\""
+        },
+        {
+            "signal_type": "office_expansion",
+            "company_name": "Wireworks",
+            "location": "Bangalore",
+            "intent": "completed",
+            "recency": null,
+            "confidence": 1.0,
+            "status": "qualified",
+            "evidence": {
+                "text": "We are excited to announce the inauguration of Wireworks’ Bangalore office",
+                "reason": "The post confirms the inauguration of a new office for Wireworks in Bangalore."
+            },
+            "source": "linkedin",
+            "source_url": null,
+            "discovery_query": "#BusinessExpansion Bangalore technology"
+        },
+        {
+            "signal_type": "office_expansion",
+            "company_name": "3M",
+            "location": "Bengaluru",
+            "intent": "completed",
+            "recency": null,
+            "confidence": 1.0,
+            "status": "qualified",
+            "evidence": {
+                "text": "3M India’s Bengaluru GCC has crossed 400 employees. The centre has evolved from fewer than 100 employees just 2–3 years ago",
+                "reason": "The post confirms the growth and expansion of 3M's GCC in Bengaluru."
+            },
+            "source": "linkedin",
+            "source_url": null,
+            "discovery_query": "#GCCIndia Bangalore technology"
+        },
+        {
+            "signal_type": "office_expansion",
+            "company_name": "Aeries Technology, Inc.",
+            "location": "Bangalore",
+            "intent": "planned",
+            "recency": null,
+            "confidence": 0.9,
+            "status": "qualified",
+            "evidence": {
+                "text": "Aeries Technology, Inc. has secured a significant multi-year, multi-million-dollar engagement... the company will establish a dedicated Global Capability Center (GCC) in Bangalore, India.",
+                "reason": "The post confirms Aeries Technology, Inc. will establish a new GCC in Bangalore."
+            },
+            "source": "linkedin",
+            "source_url": null,
+            "discovery_query": "#GCCExpansion Bangalore technology"
+        }
+    ]
+}
