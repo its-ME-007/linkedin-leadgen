@@ -1,27 +1,55 @@
 from typing import Any
+import json
+import re
+from urllib.parse import urlparse
+
+
+class ExecutiveDiscoveryProviderError(Exception):
+    """Raised when an executive candidate provider cannot be queried."""
 
 
 class ExecutiveDiscoveryService:
     """
-    Signal-aware executive discovery role grammar.
+    Signal-aware executive discovery.
 
-    This service determines which leadership roles should be searched
-    for a particular business signal.
+    Discovery sources:
+        1. LinkedIn MCP search_people()
+        2. Optional web-search/X-Ray provider
 
-    Design principle:
+    IMPORTANT DESIGN RULE:
 
-        Signal type
-            ↓
-        Canonical target roles
-            ↓
-        Search aliases
-            ↓
-        Contact discovery providers
+        Search sources discover PEOPLE.
 
-    Canonical role names are used throughout the application.
+        ROLE_GRAMMAR only classifies people that were actually discovered.
 
-    Aliases are ONLY alternate search terms and must never become
-    separate canonical roles.
+        The service must NEVER manufacture a person from a role.
+
+    Flow:
+
+        qualified signal
+            |
+            +--------------------+
+            |                    |
+            v                    v
+        LinkedIn             Web/X-Ray
+        search_people        search
+            |                    |
+            +---------+----------+
+                      |
+                      v
+                parse people
+                      |
+                      v
+                  normalize
+                      |
+                      v
+                 deduplicate
+                      |
+                      v
+                role matching
+                      |
+                      v
+             relevant executives
     """
 
     ROLE_GRAMMAR = {
@@ -489,92 +517,1695 @@ class ExecutiveDiscoveryService:
         },
     }
 
-    def __init__(self):
-        pass
-
-    def get_target_roles(
+    def __init__(
         self,
-        signal_type: str,
+        linkedin_provider=None,
+        web_search_service=None,
+    ):
+        """
+        Keep the existing constructor interface.
+
+        linkedin_provider:
+            LinkedIn MCP provider.
+
+        web_search_service:
+            Optional generic web search provider.
+
+        The web provider is expected to expose either:
+
+            search(query)
+
+        or:
+
+            async search(query)
+
+        It may be backed by Google, SearXNG, Tavily, Brave,
+        Exa, Firecrawl, etc.
+
+        The executive discovery service itself does not depend
+        on a particular search vendor.
+        """
+
+        self.linkedin = linkedin_provider
+        self.web_search = web_search_service
+
+    async def discover_executives(
+        self,
+        signal: dict[str, Any],
         max_tier: int = 3,
+        per_title_limit: int = 20,
+        use_web_fallback: bool = False,
     ) -> list[dict[str, Any]]:
         """
-        Return prioritized canonical roles for a signal type.
+        Discover actual people from LinkedIn and optionally
+        Google/X-Ray web search.
 
-        Lower tier number means higher priority.
+        Existing interface is preserved.
 
-        Every returned role has exactly one canonical `role` name.
-        Alternate titles are stored separately under `aliases`.
+        IMPORTANT:
+
+        No role is ever converted into a person.
+
+        People must originate from one of the discovery sources.
         """
 
-        grammar = self.ROLE_GRAMMAR.get(signal_type)
+        signal_type = signal.get("signal_type")
+        company = signal.get("company_name")
+        location = signal.get("location")
 
-        if not grammar:
+        if not signal_type or not company:
             return []
-
-        roles = []
-
-        for tier in range(1, max_tier + 1):
-
-            tier_name = f"tier_{tier}"
-
-            for role in grammar.get(tier_name, []):
-
-                roles.append({
-                    **role,
-                    "priority": tier,
-                })
-
-        return roles
-
-    def get_search_titles(
-        self,
-        signal_type: str,
-        max_tier: int = 3,
-    ) -> list[str]:
-        """
-        Return canonical titles and aliases for searching.
-
-        Canonical titles remain the application's normalized role
-        representation. Aliases are search-only alternatives.
-        """
 
         roles = self.get_target_roles(
             signal_type=signal_type,
             max_tier=max_tier,
         )
 
-        titles = []
+        if not roles:
+            return []
+
+        role_patterns = self._build_role_patterns(roles)
+
+        all_people = []
+
+        # ============================================================
+        # SOURCE 1: LINKEDIN MCP
+        # ============================================================
+
+        if self.linkedin:
+
+            print(
+                f"[EXECUTIVE DISCOVERY] "
+                f"LinkedIn people search: "
+                f"company={company!r}, "
+                f"location={location!r}"
+            )
+
+            try:
+
+                raw_people = await self.linkedin.search_people(
+                    f"{company} {location}",
+                    limit=40,
+                )
+
+                print(
+                    "[EXECUTIVE DISCOVERY] "
+                    "LinkedIn search completed."
+                )
+
+                people = self._extract_people(
+                    raw_people
+                )
+
+                print(
+                    f"[EXECUTIVE DISCOVERY] "
+                    f"LinkedIn returned "
+                    f"{len(people)} people"
+                )
+
+                all_people.extend(
+                    self._tag_source(
+                        people,
+                        "linkedin",
+                    )
+                )
+
+            except Exception as exc:
+
+                print(
+                    "[EXECUTIVE DISCOVERY] "
+                    f"LinkedIn search failed: {exc}"
+                )
+
+                # LinkedIn failure should not prevent
+                # the optional web discovery layer.
+                if not use_web_fallback and not self.web_search:
+                    raise ExecutiveDiscoveryProviderError(
+                        f"LinkedIn search_people failed "
+                        f"for {company}: {exc}"
+                    ) from exc
+
+        # ============================================================
+        # SOURCE 2: GOOGLE X-RAY / WEB SEARCH
+        # ============================================================
+
+        if self.web_search:
+
+            xray_query = self._build_xray_query(
+                company=company,
+                location=location,
+            )
+
+            print(
+                "[EXECUTIVE DISCOVERY] "
+                f"X-Ray search: {xray_query}"
+            )
+
+            try:
+
+                raw_web_results = await self._search_web(
+                    xray_query
+                )
+
+                web_people = self._extract_web_people(
+                    raw_web_results
+                )
+
+                print(
+                    f"[EXECUTIVE DISCOVERY] "
+                    f"X-Ray returned "
+                    f"{len(web_people)} people"
+                )
+
+                all_people.extend(
+                    self._tag_source(
+                        web_people,
+                        "google_xray",
+                    )
+                )
+
+            except Exception as exc:
+
+                print(
+                    "[EXECUTIVE DISCOVERY] "
+                    f"X-Ray search failed: {exc}"
+                )
+
+                # Web search is supplementary.
+                # Do not destroy valid LinkedIn results.
+                if not all_people:
+                    print(
+                        "[EXECUTIVE DISCOVERY] "
+                        "No people discovered from any source."
+                    )
+
+        # ============================================================
+        # NORMALIZE + DEDUPLICATE
+        # ============================================================
+
+        normalized_people = []
+
+        for person in all_people:
+
+            normalized = self._normalize_person(
+                person,
+                company=company,
+            )
+
+            if not normalized:
+                continue
+
+            # A real identity is mandatory.
+            if not normalized.get("name"):
+                continue
+
+            normalized_people.append(
+                normalized
+            )
+
+        normalized_people = (
+            self._deduplicate_raw_people(
+                normalized_people
+            )
+        )
+
+        print(
+            f"[EXECUTIVE DISCOVERY] "
+            f"Unique discovered people: "
+            f"{len(normalized_people)}"
+        )
+
+        # ============================================================
+        # ROLE MATCHING
+        # ============================================================
+
+        candidates = []
+
+        for person in normalized_people:
+
+            matched = self._match_person_to_roles(
+                person,
+                role_patterns,
+            )
+
+            if not matched:
+                continue
+
+            best_match = matched[0]
+
+            candidate = {
+                "name": person.get("name"),
+                "role": person.get("role"),
+                "headline": person.get("headline"),
+                "linkedin_url": person.get("linkedin_url"),
+                "company_name": company,
+                "location": person.get("location"),
+                "tier": best_match["tier"],
+                "matched_role": best_match["role"],
+                "matched_title": best_match["term"],
+                "reason": best_match.get("reason"),
+                "confidence": best_match["confidence"],
+                "source": person.get(
+                    "source",
+                    "unknown",
+                ),
+            }
+
+            candidates.append(
+                candidate
+            )
+
+        return self._deduplicate_people(
+            candidates
+        )
+
+    # ================================================================
+    # ROLE HELPERS
+    # ================================================================
+
+    @staticmethod
+    def _build_role_patterns(
+        roles,
+    ):
+        patterns = []
 
         for role in roles:
 
-            titles.append(
-                role["role"]
+            canonical_role = role.get(
+                "role",
+                "",
             )
 
-            titles.extend(
-                role.get("aliases", [])
-            )
+            terms = [
+                canonical_role,
+                *role.get(
+                    "aliases",
+                    [],
+                ),
+            ]
 
-        # Preserve order while removing duplicates.
-        return list(
-            dict.fromkeys(titles)
+            for term in terms:
+
+                if not term:
+                    continue
+
+                patterns.append(
+                    {
+                        "tier": role.get("tier"),
+                        "role": canonical_role,
+                        "term": term,
+                        "reason": role.get(
+                            "reason"
+                        ),
+                    }
+                )
+
+        return patterns
+
+    @classmethod
+    def get_target_roles(
+        cls,
+        signal_type: str,
+        max_tier: int = 3,
+    ) -> list[dict[str, Any]]:
+
+        grammar = cls.ROLE_GRAMMAR.get(
+            signal_type
         )
 
-    def get_roles_by_priority(
-        self,
-        signal_type: str,
-    ) -> dict[int, list[dict[str, Any]]]:
-        """
-        Return canonical roles grouped by priority tier.
-        """
-
-        grammar = self.ROLE_GRAMMAR.get(signal_type)
-
         if not grammar:
-            return {}
+            return []
+
+        roles = []
+
+        for tier_number in range(
+            1,
+            max_tier + 1,
+        ):
+
+            tier_key = (
+                f"tier_{tier_number}"
+            )
+
+            for role in grammar.get(
+                tier_key,
+                [],
+            ):
+
+                roles.append(
+                    {
+                        **role,
+                        "tier": tier_number,
+                    }
+                )
+
+        return roles
+
+    # ================================================================
+    # GOOGLE X-RAY
+    # ================================================================
+
+    @staticmethod
+    def _build_xray_query(
+        company: str,
+        location: str | None = None,
+    ) -> str:
+        """
+        Build a broad LinkedIn X-Ray query.
+
+        IMPORTANT:
+
+        We intentionally do NOT put individual role names into
+        this query.
+
+        The search engine should discover people first.
+
+        Role filtering happens later against actual profiles.
+
+        This avoids the old architecture where:
+            role -> search -> fake role record
+
+        and instead gives:
+            company -> people -> role classification
+        """
+
+        company_clean = (
+            str(company)
+            .strip()
+            .replace('"', "")
+        )
+
+        location_part = ""
+
+        if location:
+            location_clean = (
+                str(location)
+                .strip()
+                .replace('"', "")
+            )
+
+            if location_clean:
+                location_part = (
+                    f' "{location_clean}"'
+                )
+
+        return (
+            'site:linkedin.com/in/ '
+            f'"{company_clean}"'
+            f'{location_part} '
+            '-intitle:"profiles"'
+        )
+
+    async def _search_web(
+        self,
+        query: str,
+    ):
+        """
+        Call the injected web-search provider.
+
+        Supports both synchronous and asynchronous providers.
+
+        Expected common interface:
+
+            service.search(query)
+
+        The returned value is passed to the literal parser.
+        """
+
+        if not self.web_search:
+            return []
+
+        search_method = getattr(
+            self.web_search,
+            "search",
+            None,
+        )
+
+        if not callable(search_method):
+            raise TypeError(
+                "web_search_service must expose "
+                "a callable search(query) method"
+            )
+
+        result = search_method(
+            query
+        )
+
+        if hasattr(
+            result,
+            "__await__",
+        ):
+            result = await result
+
+        return result
+
+    @classmethod
+    def _extract_web_people(
+        cls,
+        raw_result,
+    ):
+        """
+        Extract actual people from search-engine results.
+
+        This parser is deliberately conservative.
+
+        A search result becomes a person only when it contains
+        a LinkedIn profile URL or enough explicit profile identity
+        information.
+
+        We never infer a person merely from:
+            - a company name
+            - a role
+            - a search query
+        """
+
+        if not raw_result:
+            return []
+
+        results = cls._flatten_web_results(
+            raw_result
+        )
+
+        people = []
+
+        for result in results:
+
+            if isinstance(
+                result,
+                str,
+            ):
+                candidate = cls._parse_xray_result_text(
+                    result
+                )
+
+                if candidate:
+                    people.append(
+                        candidate
+                    )
+
+                continue
+
+            if not isinstance(
+                result,
+                dict,
+            ):
+                continue
+
+            candidate = (
+                cls._parse_xray_result_dict(
+                    result
+                )
+            )
+
+            if candidate:
+                people.append(
+                    candidate
+                )
+
+        return people
+
+    @staticmethod
+    def _flatten_web_results(
+        raw_result,
+    ):
+        """
+        Normalize common search-provider envelopes.
+
+        This does not use an LLM.
+        """
+
+        if isinstance(
+            raw_result,
+            list,
+        ):
+            return raw_result
+
+        if isinstance(
+            raw_result,
+            dict,
+        ):
+
+            for key in (
+                "results",
+                "organic_results",
+                "items",
+                "data",
+                "web",
+            ):
+
+                value = raw_result.get(
+                    key
+                )
+
+                if isinstance(
+                    value,
+                    list,
+                ):
+                    return value
+
+            return [
+                raw_result
+            ]
+
+        return [raw_result]
+
+    @classmethod
+    def _parse_xray_result_dict(
+        cls,
+        result,
+    ):
+        """
+        Parse a typical search-engine result.
+
+        Common fields:
+
+            title
+            url
+            link
+            snippet
+            description
+        """
+
+        url = (
+            result.get("url")
+            or result.get("link")
+            or result.get("href")
+        )
+
+        title = (
+            result.get("title")
+            or result.get("name")
+        )
+
+        snippet = (
+            result.get("snippet")
+            or result.get("description")
+            or result.get("text")
+            or ""
+        )
+
+        # A LinkedIn profile is required.
+        linkedin_url = (
+            cls._extract_linkedin_profile_url(
+                url
+            )
+        )
+
+        if not linkedin_url:
+
+            linkedin_url = (
+                cls._extract_linkedin_profile_url(
+                    str(snippet)
+                )
+            )
+
+        if not linkedin_url:
+            return None
+
+        name = cls._extract_name_from_xray(
+            title,
+            snippet,
+        )
+
+        if not name:
+            return None
+
+        role = cls._extract_role_from_xray(
+            title,
+            snippet,
+            name,
+        )
+
+        location = (
+            cls._extract_location_from_xray(
+                snippet
+            )
+        )
 
         return {
-            1: grammar.get("tier_1", []),
-            2: grammar.get("tier_2", []),
-            3: grammar.get("tier_3", []),
+            "name": name,
+            "role": role,
+            "headline": (
+                str(snippet).strip()
+                if snippet
+                else None
+            ),
+            "linkedin_url": linkedin_url,
+            "location": location,
+            "raw_text": (
+                f"{title or ''} "
+                f"{snippet or ''}"
+            ).strip(),
         }
+
+    @classmethod
+    def _parse_xray_result_text(
+        cls,
+        text,
+    ):
+        """
+        Parse a raw search result string.
+
+        This exists for search providers that return text rather
+        than structured dictionaries.
+        """
+
+        if not text:
+            return None
+
+        linkedin_url = (
+            cls._extract_linkedin_profile_url(
+                text
+            )
+        )
+
+        if not linkedin_url:
+            return None
+
+        lines = [
+            line.strip()
+            for line in str(text).splitlines()
+            if line.strip()
+        ]
+
+        title = (
+            lines[0]
+            if lines
+            else None
+        )
+
+        name = cls._extract_name_from_xray(
+            title,
+            text,
+        )
+
+        if not name:
+            return None
+
+        role = cls._extract_role_from_xray(
+            title,
+            text,
+            name,
+        )
+
+        return {
+            "name": name,
+            "role": role,
+            "headline": text.strip(),
+            "linkedin_url": linkedin_url,
+            "location": (
+                cls._extract_location_from_xray(
+                    text
+                )
+            ),
+            "raw_text": text.strip(),
+        }
+
+    @staticmethod
+    def _extract_linkedin_profile_url(
+        value,
+    ):
+        if not value:
+            return None
+
+        text = str(value)
+
+        match = re.search(
+            r'https?://(?:www\.)?linkedin\.com/in/[A-Za-z0-9%_\-./]+',
+            text,
+            flags=re.IGNORECASE,
+        )
+
+        if not match:
+            return None
+
+        url = match.group(0)
+
+        # Remove trailing punctuation commonly attached
+        # to URLs in snippets.
+        url = url.rstrip(
+            ".,);]}>\"'"
+        )
+
+        return url
+
+    @staticmethod
+    def _extract_name_from_xray(
+        title,
+        snippet,
+    ):
+        """
+        Extract a likely person name from a Google/X-Ray result.
+
+        We deliberately avoid trying to infer a name from arbitrary
+        prose. LinkedIn result titles are usually:
+
+            John Smith - Director of Operations - SAP
+
+        or:
+
+            John Smith - SAP | LinkedIn
+        """
+
+        candidates = []
+
+        if title:
+            candidates.append(
+                str(title)
+            )
+
+        if snippet:
+            candidates.append(
+                str(snippet)
+            )
+
+        for text in candidates:
+
+            # Remove LinkedIn branding.
+            cleaned = re.sub(
+                r"\s*\|\s*LinkedIn.*$",
+                "",
+                text,
+                flags=re.IGNORECASE,
+            )
+
+            # Split common LinkedIn title format.
+            first_part = re.split(
+                r"\s+-\s+|\s+\|\s+",
+                cleaned,
+                maxsplit=1,
+            )[0].strip()
+
+            # Strip common search-result prefixes.
+            first_part = re.sub(
+                r"^(profiles?|people)\s*:\s*",
+                "",
+                first_part,
+                flags=re.IGNORECASE,
+            ).strip()
+
+            words = first_part.split()
+
+            if not (
+                2 <= len(words) <= 6
+            ):
+                continue
+
+            # Conservative human-name validation.
+            if not all(
+                re.search(
+                    r"[A-Za-z]",
+                    word,
+                )
+                for word in words
+            ):
+                continue
+
+            # Do not accept obvious non-person titles.
+            lowered = first_part.lower()
+
+            if any(
+                blocked in lowered
+                for blocked in (
+                    "linkedin",
+                    "company",
+                    "jobs",
+                    "search",
+                    "profile",
+                )
+            ):
+                continue
+
+            return first_part
+
+        return None
+
+    @staticmethod
+    def _extract_role_from_xray(
+        title,
+        snippet,
+        name,
+    ):
+        """
+        Extract an explicit title from the search result.
+
+        This is extraction, not role classification.
+
+        Actual classification is done later by
+        _match_person_to_roles().
+        """
+
+        texts = []
+
+        if title:
+            texts.append(
+                str(title)
+            )
+
+        if snippet:
+            texts.append(
+                str(snippet)
+            )
+
+        for text in texts:
+
+            cleaned = text
+
+            if name:
+                cleaned = cleaned.replace(
+                    name,
+                    "",
+                )
+
+            cleaned = re.sub(
+                r"\|\s*LinkedIn.*$",
+                "",
+                cleaned,
+                flags=re.IGNORECASE,
+            )
+
+            parts = re.split(
+                r"\s+-\s+|\s+\|\s+",
+                cleaned,
+            )
+
+            for part in parts:
+
+                part = part.strip()
+
+                if not part:
+                    continue
+
+                lowered = part.lower()
+
+                # Company-only fragments should not become roles.
+                if lowered in {
+                    "linkedin",
+                    "linkedin member",
+                }:
+                    continue
+
+                # A title normally contains one of these
+                # occupational indicators.
+                if any(
+                    token in lowered
+                    for token in (
+                        "director",
+                        "manager",
+                        "head",
+                        "chief",
+                        "president",
+                        "vice president",
+                        "vp ",
+                        "officer",
+                        "counsel",
+                        "lead",
+                        "strategy",
+                        "operations",
+                        "facilities",
+                        "real estate",
+                        "finance",
+                        "procurement",
+                        "legal",
+                        "information technology",
+                        "technology",
+                        "workplace",
+                        "human resources",
+                        "hr ",
+                        "talent",
+                        "business development",
+                        "expansion",
+                    )
+                ):
+                    return part
+
+        return None
+
+    @staticmethod
+    def _extract_location_from_xray(
+        text,
+    ):
+        if not text:
+            return None
+
+        location_patterns = [
+            r"\bBangalore\b",
+            r"\bBengaluru\b",
+            r"\bMumbai\b",
+            r"\bDelhi\b",
+            r"\bHyderabad\b",
+            r"\bChennai\b",
+            r"\bPune\b",
+            r"\bNoida\b",
+            r"\bGurugram\b",
+        ]
+
+        for pattern in location_patterns:
+
+            match = re.search(
+                pattern,
+                str(text),
+                flags=re.IGNORECASE,
+            )
+
+            if match:
+                return match.group(0)
+
+        return None
+
+    # ================================================================
+    # LINKEDIN RESPONSE PARSING
+    # ================================================================
+
+    @staticmethod
+    def _extract_people(raw_result):
+        """Extract actual people from the LinkedIn MCP response."""
+        if not raw_result:
+            return []
+
+        # MCP CallToolResult -> TextContent -> JSON payload.
+        if hasattr(raw_result, "content"):
+            content = raw_result.content
+            if content:
+                first = content[0]
+                if hasattr(first, "text"):
+                    text = first.text
+                    try:
+                        raw_result = json.loads(text)
+                    except (json.JSONDecodeError, TypeError):
+                        return ExecutiveDiscoveryService._parse_people_text(text)
+
+        if not isinstance(raw_result, dict) and hasattr(raw_result, "structured_content"):
+            structured = raw_result.structured_content
+            if isinstance(structured, dict):
+                raw_result = structured
+
+        if isinstance(raw_result, dict):
+            for key in ("people", "results", "profiles", "items"):
+                value = raw_result.get(key)
+                if isinstance(value, list):
+                    return value
+
+            sections = raw_result.get("sections")
+            references = raw_result.get("references")
+            if isinstance(sections, dict):
+                search_results = sections.get("search_results")
+                if isinstance(search_results, str):
+                    return ExecutiveDiscoveryService._parse_people_text(
+                        search_results,
+                        references=references,
+                    )
+
+            data = raw_result.get("data")
+            if isinstance(data, dict):
+                sections = data.get("sections")
+                if isinstance(sections, dict):
+                    search_results = sections.get("search_results")
+                    if isinstance(search_results, str):
+                        return ExecutiveDiscoveryService._parse_people_text(
+                            search_results,
+                            references=data.get("references", references),
+                        )
+            return []
+
+        if isinstance(raw_result, list):
+            return raw_result
+
+        return []
+
+    @staticmethod
+    def _parse_people_text(
+        text: str,
+        references=None,
+    ):
+        """
+        Conservative parser for LinkedIn MCP's semi-structured
+        search-results text.
+        """
+
+        if not text:
+            return []
+
+        lines = [
+            line.strip()
+            for line in text.splitlines()
+            if line.strip()
+        ]
+
+        people = []
+
+        # LinkedIn may display "LinkedIn Member" in the text while the MCP
+        # still exposes the real identity in references.search_results.
+        if isinstance(references, dict):
+            person_references = references.get("search_results", []) or []
+        elif isinstance(references, list):
+            person_references = references
+        else:
+            person_references = []
+        person_reference_index = 0
+
+        ignored_lines = {
+            "LinkedIn Member",
+            "View",
+            "Message",
+        }
+
+        noise_phrases = (
+            "you've reached the monthly limit",
+            "you’ve reached the monthly limit",
+            "upgrade to premium",
+            "try premium",
+            "unlimited search",
+            "1-month free trial",
+        )
+
+        current = None
+
+        def flush():
+
+            nonlocal current
+
+            if not current:
+                return
+
+            name = current.get("name")
+            if not name:
+                current = None
+                return
+
+            if name.lower() in {"view", "message"}:
+                current = None
+                return
+
+            if name.lower() == "linkedin member":
+                reference = current.get("_reference")
+                if isinstance(reference, dict):
+                    ref_name = reference.get("text") or reference.get("name")
+                    ref_url = reference.get("url") or reference.get("link")
+                    if ref_name:
+                        current["name"] = str(ref_name).strip()
+                    if ref_url:
+                        current["linkedin_url"] = str(ref_url).strip()
+
+            if not current.get("name") or current["name"].lower() == "linkedin member":
+                current = None
+                return
+
+            current.pop("_reference", None)
+            people.append(current)
+            current = None
+
+        i = 0
+
+        while i < len(lines):
+
+            line = lines[i]
+            lower = line.lower()
+
+            if any(
+                phrase in lower
+                for phrase in noise_phrases
+            ):
+                i += 1
+                continue
+
+            if line in ignored_lines:
+                i += 1
+                continue
+
+            # Standard LinkedIn block:
+            #
+            # Name
+            # • 3rd+
+            # Headline
+            # Location
+
+            if (
+                i + 2 < len(lines)
+                and "•" in lines[i + 1]
+            ):
+
+                flush()
+
+                reference = None
+                if person_reference_index < len(person_references):
+                    reference = person_references[person_reference_index]
+                person_reference_index += 1
+
+                current = {
+                    "name": line,
+                    "headline": lines[i + 2],
+                    "linkedin_url": (
+                        reference.get("url") or reference.get("link")
+                        if isinstance(reference, dict) else None
+                    ),
+                    "location": None,
+                    "raw_text": "",
+                    "_reference": reference,
+                }
+
+                if isinstance(reference, dict):
+                    ref_name = reference.get("text") or reference.get("name")
+                    if ref_name:
+                        current["name"] = str(ref_name).strip()
+
+                if i + 3 < len(lines):
+
+                    possible_location = (
+                        lines[i + 3]
+                    )
+
+                    if (
+                        possible_location
+                        not in ignored_lines
+                        and "•"
+                        not in possible_location
+                    ):
+
+                        current["location"] = (
+                            possible_location
+                        )
+
+                i += 3
+                continue
+
+            # Fallback block when connection degree
+            # is missing.
+
+            if (
+                i + 1 < len(lines)
+                and not line.startswith("--")
+                and "current:" not in lower
+                and "past:" not in lower
+            ):
+
+                next_line = (
+                    lines[i + 1]
+                )
+
+                if (
+                    len(line) <= 100
+                    and len(next_line) <= 200
+                    and not next_line.startswith(
+                        (
+                            "Current:",
+                            "Past:",
+                            "Summary:",
+                        )
+                    )
+                    and "•"
+                    not in next_line
+                ):
+
+                    words = line.split()
+
+                    if (
+                        2 <= len(words) <= 6
+                        and all(
+                            any(
+                                char.isalpha()
+                                for char in word
+                            )
+                            for word in words
+                        )
+                    ):
+
+                        flush()
+
+                        current = {
+                            "name": line,
+                            "headline": next_line,
+                            "linkedin_url": None,
+                            "location": (
+                                lines[i + 2]
+                                if i + 2 < len(lines)
+                                else None
+                            ),
+                            "raw_text": "",
+                        }
+
+                        i += 2
+                        continue
+
+            if current:
+
+                if lower.startswith(
+                    "current:"
+                ):
+
+                    current["current"] = (
+                        line[
+                            len("Current:"):
+                        ].strip()
+                    )
+
+                elif lower.startswith(
+                    "past:"
+                ):
+
+                    current["past"] = (
+                        line[
+                            len("Past:"):
+                        ].strip()
+                    )
+
+                elif lower.startswith(
+                    "summary:"
+                ):
+
+                    current["summary"] = (
+                        line[
+                            len("Summary:"):
+                        ].strip()
+                    )
+
+                current["raw_text"] = (
+                    current.get(
+                        "raw_text",
+                        "",
+                    )
+                    + " "
+                    + line
+                ).strip()
+
+            i += 1
+
+        flush()
+
+        return people
+
+    # ================================================================
+    # NORMALIZATION
+    # ================================================================
+
+    @staticmethod
+    def _tag_source(
+        people,
+        source,
+    ):
+        tagged = []
+
+        for person in people:
+
+            if not isinstance(
+                person,
+                dict,
+            ):
+                continue
+
+            copy = dict(
+                person
+            )
+
+            copy["source"] = source
+
+            tagged.append(
+                copy
+            )
+
+        return tagged
+
+    @staticmethod
+    def _normalize_person(
+        person,
+        company: str,
+    ):
+        """
+        Convert a discovered person into a stable internal shape.
+
+        Missing fields remain None.
+
+        No person is invented here.
+        """
+
+        if not isinstance(
+            person,
+            dict,
+        ):
+            return None
+
+        name = (
+            person.get("name")
+            or person.get("full_name")
+            or person.get("fullName")
+        )
+
+        role = (
+            person.get("role")
+            or person.get("title")
+            or person.get("job_title")
+            or person.get("jobTitle")
+        )
+
+        headline = person.get(
+            "headline"
+        )
+
+        linkedin_url = (
+            person.get("linkedin_url")
+            or person.get("linkedinUrl")
+            or person.get("profile_url")
+            or person.get("profileUrl")
+            or person.get("url")
+        )
+
+        location = (
+            person.get("location")
+            or person.get("geo")
+            or person.get("city")
+        )
+
+        if not role:
+
+            current_role = (
+                person.get(
+                    "current_role"
+                )
+            )
+
+            if isinstance(
+                current_role,
+                dict,
+            ):
+
+                role = (
+                    current_role.get(
+                        "title"
+                    )
+                    or current_role.get(
+                        "role"
+                    )
+                )
+
+        if not name:
+            return None
+
+        returned_company = (
+            person.get("company")
+            or person.get("company_name")
+            or person.get("companyName")
+        )
+
+        return {
+            "name": str(
+                name
+            ).strip(),
+
+            "role": (
+                str(role).strip()
+                if role
+                else None
+            ),
+
+            "headline": (
+                str(
+                    headline
+                ).strip()
+                if headline
+                else None
+            ),
+
+            "linkedin_url": (
+                linkedin_url
+            ),
+
+            "location": location,
+
+            "company": (
+                returned_company
+            ),
+
+            "current": person.get("current"),
+            "past": person.get("past"),
+            "summary": person.get("summary"),
+            "current_role": person.get("current_role"),
+
+            "source": person.get(
+                "source",
+                "unknown",
+            ),
+
+            "raw": person,
+        }
+
+    # ================================================================
+    # ROLE MATCHING
+    # ================================================================
+
+    @staticmethod
+    def _match_person_to_roles(
+        person,
+        role_patterns,
+    ):
+        """
+        Match an ACTUAL discovered person against role vocabulary.
+
+        Deterministic matching is used first.
+
+        No role -> person generation is possible here.
+        """
+
+        text_parts = [
+            person.get("role") or "",
+            person.get("headline") or "",
+            person.get("current") or "",
+            person.get("summary") or "",
+        ]
+
+        current_role = person.get("current_role")
+        if isinstance(current_role, dict):
+            text_parts.extend([
+                current_role.get("title") or "",
+                current_role.get("role") or "",
+                current_role.get("company") or "",
+            ])
+        elif current_role:
+            text_parts.append(str(current_role))
+
+        haystack = " ".join(
+            text_parts
+        ).lower()
+
+        if not haystack.strip():
+            return []
+
+        matches = []
+
+        for pattern in role_patterns:
+
+            term = (
+                pattern["term"]
+                .lower()
+                .strip()
+            )
+
+            if not term:
+                continue
+
+            if term not in haystack:
+                continue
+
+            confidence = min(
+                0.99,
+                0.70
+                + (
+                    len(
+                        term.split()
+                    )
+                    * 0.06
+                ),
+            )
+
+            matches.append(
+                {
+                    "tier": pattern[
+                        "tier"
+                    ],
+                    "role": pattern[
+                        "role"
+                    ],
+                    "term": pattern[
+                        "term"
+                    ],
+                    "reason": pattern.get(
+                        "reason"
+                    ),
+                    "confidence": confidence,
+                }
+            )
+
+        matches.sort(
+            key=lambda item: (
+                item["tier"],
+                -len(
+                    item["term"]
+                ),
+            )
+        )
+
+        return matches
+
+    # ================================================================
+    # RAW PEOPLE DEDUPLICATION
+    # ================================================================
+
+    @staticmethod
+    def _deduplicate_raw_people(
+        people,
+    ):
+        """
+        Merge the same person discovered through LinkedIn and X-Ray.
+
+        LinkedIn URL is preferred as the stable identity.
+
+        If no URL exists, use normalized name + location.
+        """
+
+        seen = set()
+        unique = []
+
+        for person in people:
+
+            linkedin_url = (
+                person.get(
+                    "linkedin_url"
+                )
+            )
+
+            if linkedin_url:
+
+                key = (
+                    "url",
+                    str(
+                        linkedin_url
+                    ).strip().lower(),
+                )
+
+            else:
+
+                name = (
+                    person.get(
+                        "name"
+                    )
+                    or ""
+                )
+
+                location = (
+                    person.get(
+                        "location"
+                    )
+                    or ""
+                )
+
+                key = (
+                    "name",
+                    re.sub(
+                        r"\s+",
+                        " ",
+                        str(
+                            name
+                        ).strip().lower(),
+                    ),
+                    re.sub(
+                        r"\s+",
+                        " ",
+                        str(
+                            location
+                        ).strip().lower(),
+                    ),
+                )
+
+            if key in seen:
+                continue
+
+            seen.add(
+                key
+            )
+
+            unique.append(
+                person
+            )
+
+        return unique
+
+    # ================================================================
+    # FINAL DEDUPLICATION
+    # ================================================================
+
+    @staticmethod
+    def _deduplicate_people(
+        candidates,
+    ):
+        """
+        Deduplicate final executive candidates.
+
+        Same person may have been discovered by:
+            - LinkedIn MCP
+            - Google X-Ray
+
+        Prefer LinkedIn identity where available.
+        """
+
+        by_key = {}
+
+        for candidate in candidates:
+
+            linkedin_url = (
+                candidate.get(
+                    "linkedin_url"
+                )
+            )
+
+            if linkedin_url:
+
+                key = (
+                    "url",
+                    str(
+                        linkedin_url
+                    ).strip().lower(),
+                )
+
+            else:
+
+                key = (
+                    "name",
+                    str(
+                        candidate.get(
+                            "name",
+                            "",
+                        )
+                    ).strip().lower(),
+                )
+
+            existing = by_key.get(
+                key
+            )
+
+            if existing is None:
+
+                by_key[key] = (
+                    candidate
+                )
+                continue
+
+            # Prefer LinkedIn over X-Ray when both
+            # identify the same person.
+
+            if (
+                existing.get(
+                    "source"
+                )
+                != "linkedin"
+                and candidate.get(
+                    "source"
+                )
+                == "linkedin"
+            ):
+
+                by_key[key] = (
+                    candidate
+                )
+
+        return list(
+            by_key.values()
+        )

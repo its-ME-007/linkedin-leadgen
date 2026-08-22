@@ -4,3 +4,4 @@ python-dotenv
 mcp
 groq
 google-genai
+httpx

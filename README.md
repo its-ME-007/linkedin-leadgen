@@ -317,6 +317,37 @@ Structured extraction and multi-page crawling when a normal search result is not
 ### Google Maps
 Optional location/office verification and enrichment. Not part of the core opportunity-discovery loop.
 
+## Future / Optional Search Infrastructure
+
+### Self-Hosted Search Alternative
+
+The initial implementation will use a hosted web-search provider (currently planned around Tavily) so that Phase 3 can be developed and tested quickly.
+
+If time permits after the core end-to-end workflow is stable, evaluate replacing or supplementing the hosted search layer with an open-source/self-hosted alternative such as `tavily-open`, potentially backed by SearXNG or another search backend.
+
+This is explicitly a **later optimization**, not a prerequisite for the MVP.
+
+Goals of this optional work:
+- reduce dependence on paid search APIs
+- provide a replaceable self-hosted search backend
+- preserve the existing `WebSearchProvider` interface
+- compare search quality, latency, reliability, and maintenance cost against the hosted provider
+
+The architecture should therefore keep search-provider implementations interchangeable:
+
+```text
+WebSearchProvider
+    |
+    +--> TavilyProvider              # initial implementation
+    |
+    +--> SelfHostedSearchProvider    # future / optional
+             |
+             +--> tavily-open
+             +--> SearXNG / other backend
+```
+
+Do not block Phase 3 development on this work. Implement the hosted provider first, then evaluate the self-hosted option once the pipeline is functioning end-to-end.
+
 ## Core Design Principle
 
 The system should discover opportunities first rather than requiring the user to provide a company list.
