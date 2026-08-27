@@ -5,3 +5,4 @@ mcp
 groq
 google-genai
 httpx
+tavily

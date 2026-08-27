@@ -12,9 +12,8 @@ class ExecutiveDiscoveryService:
     """
     Signal-aware executive discovery.
 
-    Discovery sources:
-        1. LinkedIn MCP search_people()
-        2. Optional web-search/X-Ray provider
+    Discovery source:
+        - Web-search/X-Ray provider
 
     IMPORTANT DESIGN RULE:
 
@@ -31,10 +30,7 @@ class ExecutiveDiscoveryService:
             +--------------------+
             |                    |
             v                    v
-        LinkedIn             Web/X-Ray
-        search_people        search
-            |                    |
-            +---------+----------+
+                  Web/X-Ray search
                       |
                       v
                 parse people
@@ -53,6 +49,86 @@ class ExecutiveDiscoveryService:
     """
 
     ROLE_GRAMMAR = {
+
+        # Commercial property requirements are intentionally broader than
+        # expansion announcements. A real requirement may be owned by a
+        # founder, country head, leasing lead, or property/operations owner.
+        "property_requirement": {
+            "tier_1": [
+                {
+                    "role": "Real Estate / Property Lead",
+                    "aliases": [
+                        "Head of Real Estate", "Real Estate Director",
+                        "Director of Real Estate", "Head of Property",
+                        "Property Director", "Property Head",
+                        "Head of Leasing", "Leasing Director",
+                    ],
+                    "reason": "Likely owner of property selection and leasing.",
+                },
+                {
+                    "role": "Retail / Store Development Lead",
+                    "aliases": [
+                        "Head of Retail", "Retail Director",
+                        "Head of Store Development", "Store Development Head",
+                        "Retail Expansion Head", "Head of Expansion",
+                    ],
+                    "reason": "Likely owner of retail locations and rollout decisions.",
+                },
+                {
+                    "role": "Operations Leader",
+                    "aliases": [
+                        "Chief Operating Officer", "COO",
+                        "Head of Operations", "Operations Director",
+                        "Operations Head", "Country Operations Head",
+                    ],
+                    "reason": "Often sponsors location and operating-footprint decisions.",
+                },
+            ],
+            "tier_2": [
+                {
+                    "role": "Country / India Head",
+                    "aliases": [
+                        "Country Head", "India Head", "Managing Director",
+                        "General Manager", "Regional Head", "Country Manager",
+                    ],
+                    "reason": "Regional decision-maker for local property requirements.",
+                },
+                {
+                    "role": "Founder / Executive Leadership",
+                    "aliases": [
+                        "Founder", "Co-Founder", "Chief Executive Officer",
+                        "CEO", "Chief Executive",
+                    ],
+                    "reason": "May approve or directly own the requirement.",
+                },
+                {
+                    "role": "Business Development Lead",
+                    "aliases": [
+                        "Head of Business Development", "Business Development Director",
+                        "VP Business Development", "Commercial Director",
+                    ],
+                    "reason": "May coordinate market entry and property sourcing.",
+                },
+            ],
+            "tier_3": [
+                {
+                    "role": "Facilities / Workplace Lead",
+                    "aliases": [
+                        "Head of Facilities", "Facilities Director", "Facilities Manager",
+                        "Workplace Manager", "Workplace Director", "Admin Head",
+                    ],
+                    "reason": "Relevant operator for site, facilities, and workplace execution.",
+                },
+                {
+                    "role": "Finance / Procurement Lead",
+                    "aliases": [
+                        "CFO", "Chief Financial Officer", "Head of Finance",
+                        "Procurement Head", "Head of Procurement", "Procurement Manager",
+                    ],
+                    "reason": "May control approval, vendor, or lease budgets.",
+                },
+            ],
+        },
 
         # ============================================================
         # OFFICE EXPANSION
@@ -519,35 +595,18 @@ class ExecutiveDiscoveryService:
 
     def __init__(
         self,
+        web_search_services=None,
         linkedin_provider=None,
-        web_search_service=None,
     ):
         """
-        Keep the existing constructor interface.
+        web_search_services:
+            List of web search providers (Brave, Tavily, SearXNG).
+            We iterate through these to find one that works.
 
-        linkedin_provider:
-            LinkedIn MCP provider.
-
-        web_search_service:
-            Optional generic web search provider.
-
-        The web provider is expected to expose either:
-
-            search(query)
-
-        or:
-
-            async search(query)
-
-        It may be backed by Google, SearXNG, Tavily, Brave,
-        Exa, Firecrawl, etc.
-
-        The executive discovery service itself does not depend
-        on a particular search vendor.
+        linkedin_provider is retained only for backward-compatible callers;
+        executive discovery never invokes LinkedIn search.
         """
-
-        self.linkedin = linkedin_provider
-        self.web_search = web_search_service
+        self.web_search_services = web_search_services or []
 
     async def discover_executives(
         self,
@@ -555,6 +614,7 @@ class ExecutiveDiscoveryService:
         max_tier: int = 3,
         per_title_limit: int = 20,
         use_web_fallback: bool = False,
+        ai_review_fallback_limit: int = 25,
     ) -> list[dict[str, Any]]:
         """
         Discover actual people from LinkedIn and optionally
@@ -589,82 +649,24 @@ class ExecutiveDiscoveryService:
         all_people = []
 
         # ============================================================
-        # SOURCE 1: LINKEDIN MCP
+        # SOURCE: GOOGLE X-RAY / WEB SEARCH
         # ============================================================
 
-        if self.linkedin:
-
-            print(
-                f"[EXECUTIVE DISCOVERY] "
-                f"LinkedIn people search: "
-                f"company={company!r}, "
-                f"location={location!r}"
-            )
-
-            try:
-
-                raw_people = await self.linkedin.search_people(
-                    f"{company} {location}",
-                    limit=40,
-                )
-
-                print(
-                    "[EXECUTIVE DISCOVERY] "
-                    "LinkedIn search completed."
-                )
-
-                people = self._extract_people(
-                    raw_people
-                )
-
-                print(
-                    f"[EXECUTIVE DISCOVERY] "
-                    f"LinkedIn returned "
-                    f"{len(people)} people"
-                )
-
-                all_people.extend(
-                    self._tag_source(
-                        people,
-                        "linkedin",
-                    )
-                )
-
-            except Exception as exc:
-
-                print(
-                    "[EXECUTIVE DISCOVERY] "
-                    f"LinkedIn search failed: {exc}"
-                )
-
-                # LinkedIn failure should not prevent
-                # the optional web discovery layer.
-                if not use_web_fallback and not self.web_search:
-                    raise ExecutiveDiscoveryProviderError(
-                        f"LinkedIn search_people failed "
-                        f"for {company}: {exc}"
-                    ) from exc
-
-        # ============================================================
-        # SOURCE 2: GOOGLE X-RAY / WEB SEARCH
-        # ============================================================
-
-        if self.web_search:
-
+        for web_service in self.web_search_services:
             xray_query = self._build_xray_query(
                 company=company,
                 location=location,
             )
 
             print(
-                "[EXECUTIVE DISCOVERY] "
-                f"X-Ray search: {xray_query}"
+                f"[EXECUTIVE DISCOVERY] "
+                f"X-Ray search via {web_service.__class__.__name__}: {xray_query}"
             )
 
             try:
-
-                raw_web_results = await self._search_web(
-                    xray_query
+                # We need a unified way to search depending on the service signature
+                raw_web_results = await self._search_web_with_service(
+                    web_service, xray_query
                 )
 
                 web_people = self._extract_web_people(
@@ -683,21 +685,22 @@ class ExecutiveDiscoveryService:
                         "google_xray",
                     )
                 )
+                
+                # Stop if we got results, else try the next provider
+                if web_people:
+                    break
 
             except Exception as exc:
-
                 print(
-                    "[EXECUTIVE DISCOVERY] "
-                    f"X-Ray search failed: {exc}"
+                    f"[EXECUTIVE DISCOVERY] "
+                    f"X-Ray search via {web_service.__class__.__name__} failed: {exc}"
                 )
 
-                # Web search is supplementary.
-                # Do not destroy valid LinkedIn results.
-                if not all_people:
-                    print(
-                        "[EXECUTIVE DISCOVERY] "
-                        "No people discovered from any source."
-                    )
+        if not all_people:
+            print(
+                "[EXECUTIVE DISCOVERY] "
+                "No people discovered from any source."
+            )
 
         # ============================================================
         # NORMALIZE + DEDUPLICATE
@@ -775,8 +778,28 @@ class ExecutiveDiscoveryService:
                 candidate
             )
 
+        # Keep the web-discovered shortlist even when only some candidates
+        # match a narrow role term. Property requirements are often posted by
+        # brokers or founders, so title matching is a ranking signal, not a
+        # hard eligibility gate.
+        fallback_candidates = (
+            self._build_ai_review_candidates(
+                people=normalized_people,
+                company=company,
+                limit=ai_review_fallback_limit,
+                fallback_tier=max_tier,
+            )
+        )
+
+        if fallback_candidates:
+            print(
+                "[EXECUTIVE DISCOVERY] "
+                f"Keeping {len(fallback_candidates)} broader "
+                "web-discovered candidate(s) for review."
+            )
+
         return self._deduplicate_people(
-            candidates
+            [*candidates, *fallback_candidates]
         )
 
     # ================================================================
@@ -828,6 +851,13 @@ class ExecutiveDiscoveryService:
         signal_type: str,
         max_tier: int = 3,
     ) -> list[dict[str, Any]]:
+
+        signal_type = {
+            "commercial_property_requirement": "property_requirement",
+            "office_space_requirement": "property_requirement",
+            "retail_space_requirement": "property_requirement",
+            "NEW_STORE": "property_requirement",
+        }.get(signal_type, signal_type)
 
         grammar = cls.ROLE_GRAMMAR.get(
             signal_type
@@ -910,14 +940,15 @@ class ExecutiveDiscoveryService:
                 )
 
         return (
-            'site:linkedin.com/in/ '
+            '!g site:linkedin.com/in/ '
             f'"{company_clean}"'
             f'{location_part} '
             '-intitle:"profiles"'
         )
 
-    async def _search_web(
+    async def _search_web_with_service(
         self,
+        web_service,
         query: str,
     ):
         """
@@ -932,18 +963,15 @@ class ExecutiveDiscoveryService:
         The returned value is passed to the literal parser.
         """
 
-        if not self.web_search:
-            return []
-
         search_method = getattr(
-            self.web_search,
+            web_service,
             "search",
             None,
         )
 
         if not callable(search_method):
             raise TypeError(
-                "web_search_service must expose "
+                f"{web_service.__class__.__name__} must expose "
                 "a callable search(query) method"
             )
 
@@ -969,9 +997,8 @@ class ExecutiveDiscoveryService:
 
         This parser is deliberately conservative.
 
-        A search result becomes a person only when it contains
-        a LinkedIn profile URL or enough explicit profile identity
-        information.
+        A search result becomes a person when it contains an explicit human
+        name plus either a LinkedIn profile URL or a credible role/headline.
 
         We never infer a person merely from:
             - a company name
@@ -1104,7 +1131,8 @@ class ExecutiveDiscoveryService:
             or ""
         )
 
-        # A LinkedIn profile is required.
+        # Prefer a LinkedIn profile URL, but do not require it. Web results
+        # with an explicit human name and role/headline are useful leads too.
         linkedin_url = (
             cls._extract_linkedin_profile_url(
                 url
@@ -1119,9 +1147,6 @@ class ExecutiveDiscoveryService:
                 )
             )
 
-        if not linkedin_url:
-            return None
-
         name = cls._extract_name_from_xray(
             title,
             snippet,
@@ -1135,6 +1160,9 @@ class ExecutiveDiscoveryService:
             snippet,
             name,
         )
+
+        if not linkedin_url and not role:
+            return None
 
         location = (
             cls._extract_location_from_xray(
@@ -1179,9 +1207,6 @@ class ExecutiveDiscoveryService:
             )
         )
 
-        if not linkedin_url:
-            return None
-
         lines = [
             line.strip()
             for line in str(text).splitlines()
@@ -1207,6 +1232,9 @@ class ExecutiveDiscoveryService:
             text,
             name,
         )
+
+        if not linkedin_url and not role:
+            return None
 
         return {
             "name": name,
@@ -2209,3 +2237,95 @@ class ExecutiveDiscoveryService:
         return list(
             by_key.values()
         )
+
+    @staticmethod
+    def _build_ai_review_candidates(
+        people,
+        company,
+        limit=25,
+        fallback_tier=3,
+    ):
+        candidates = []
+
+        for person in people:
+            if len(candidates) >= max(1, int(limit)):
+                break
+
+            if not ExecutiveDiscoveryService._is_plausible_ai_review_candidate(
+                person
+            ):
+                continue
+
+            candidates.append(
+                {
+                    "name": person.get("name"),
+                    "role": person.get("role"),
+                    "headline": person.get("headline"),
+                    "linkedin_url": person.get("linkedin_url"),
+                    "company_name": company,
+                    "location": person.get("location"),
+                    "tier": fallback_tier,
+                    "matched_role": "AI Review",
+                    "matched_title": "ai_review_fallback",
+                    "reason": (
+                        "No deterministic role keyword matched. "
+                        "Candidate kept for AI-assisted prioritization."
+                    ),
+                    "confidence": 0.35,
+                    "source": person.get(
+                        "source",
+                        "unknown",
+                    ),
+                }
+            )
+
+        return candidates
+
+    @staticmethod
+    def _is_plausible_ai_review_candidate(
+        person,
+    ):
+        name = str(
+            person.get("name") or ""
+        ).strip()
+        headline = str(
+            person.get("headline") or ""
+        ).strip()
+        linkedin_url = person.get("linkedin_url")
+
+        if not name:
+            return False
+
+        blocked_names = (
+            "are these results helpful",
+            "message",
+            "view",
+            "linkedin member",
+        )
+
+        lowered_name = name.lower()
+        if lowered_name in blocked_names:
+            return False
+
+        if lowered_name.startswith("education:"):
+            return False
+
+        if lowered_name.startswith("current:"):
+            return False
+
+        if (
+            headline.lower() in {
+                "message",
+                "view",
+                "linkedin member",
+            }
+        ):
+            return False
+
+        if (
+            not linkedin_url
+            and len(name.split()) < 2
+        ):
+            return False
+
+        return True

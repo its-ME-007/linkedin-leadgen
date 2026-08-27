@@ -51,6 +51,7 @@ class LinkedInProvider:
             "search_people",
             {
                 "keywords": query,
+                "max_pages": max(1, (limit + 9) // 10),
             },
         )
 

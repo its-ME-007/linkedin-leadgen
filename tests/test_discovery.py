@@ -3,19 +3,7 @@ import json
 from pathlib import Path
 
 from app.services.linkedin import LinkedInProvider
-from app.services.discovery import DiscoveryService
-
-
-class WebSearchStub:
-    """
-    Temporary web-search implementation.
-
-    Replace this with the real WebSearchService later.
-    """
-
-    def search(self, query):
-        print(f"[WEB SEARCH] {query}")
-        return []
+from app.services.discovery import DiscoveryService, LinkedInDiscoveryConfig
 
 
 async def main():
@@ -24,11 +12,11 @@ async def main():
         ["uvx", "mcp-server-linkedin@latest"]
     )
 
-    web_search = WebSearchStub()
-
     discovery = DiscoveryService(
         linkedin_provider=linkedin,
-        web_search_service=web_search
+        config=LinkedInDiscoveryConfig(
+            raw_output_dir=Path("tests/output/raw_discovery"),
+        ),
     )
 
     try:
@@ -39,11 +27,10 @@ async def main():
         print("Connected.\n")
 
         criteria = {
-            "location": "Bangalore",
+            "location": "Bengaluru",
             "signal_types": [
-                "office_expansion"
+                "commercial_property_requirement"
             ],
-            "industry": "technology"
         }
 
         print("Discovery criteria:")
@@ -115,7 +102,7 @@ async def main():
             )
 
             print(
-                f"Query: {result['query']}"
+                f"Hashtag: {result['discovery_query']}"
             )
 
     finally:

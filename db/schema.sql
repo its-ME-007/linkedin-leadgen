@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS companies (
     company_id INTEGER PRIMARY KEY AUTOINCREMENT,
 
     name TEXT NOT NULL,
-    normalized_name TEXT,
+    normalized_name TEXT UNIQUE,
     domain TEXT,
 
     industry TEXT,
@@ -74,6 +74,8 @@ CREATE TABLE IF NOT EXISTS people (
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    UNIQUE(normalized_name, company_id),
 
     FOREIGN KEY (company_id)
         REFERENCES companies(company_id)
@@ -156,6 +158,8 @@ CREATE TABLE IF NOT EXISTS contact_points (
 
     discovered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_verified_at TIMESTAMP,
+
+    UNIQUE(person_id, contact_type, contact_value),
 
     FOREIGN KEY (person_id)
         REFERENCES people(person_id)

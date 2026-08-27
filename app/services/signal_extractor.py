@@ -117,6 +117,14 @@ class SignalExtractor:
                 if not text:
                     continue
 
+                # Location is passed to Gemini via the candidate block for
+                # semantic evaluation. A hard pre-filter here discards all
+                # posts that do not mention the target city verbatim, which
+                # eliminates the entire result set for hashtag-based searches
+                # (LinkedIn returns global results regardless of geography).
+                # Gemini rule 5 handles location relevance instead.
+                target_location = discovery_result.get("target_location")
+
                 # Cheap deterministic filtering
                 if self._is_obvious_noise(
                     text
@@ -278,6 +286,29 @@ class SignalExtractor:
 
         if not raw_result:
             return []
+
+        # MCP returns CallToolResult objects in the live API, while unit
+        # fixtures commonly provide the already-unwrapped dictionary. Unwrap
+        # both forms before applying the existing post parser.
+        if not isinstance(raw_result, (dict, str)):
+            structured = getattr(raw_result, "structured_content", None)
+            if structured is None:
+                structured = getattr(raw_result, "structuredContent", None)
+            if structured:
+                raw_result = structured
+            else:
+                content = getattr(raw_result, "content", None)
+                text_parts = []
+                for item in content or []:
+                    text = getattr(item, "text", None)
+                    if text:
+                        text_parts.append(text)
+                if text_parts:
+                    joined = "\n".join(text_parts)
+                    try:
+                        raw_result = json.loads(joined)
+                    except (TypeError, ValueError):
+                        raw_result = joined
 
         # ----------------------------------------
         # LinkedIn MCP structured result
@@ -479,43 +510,36 @@ class SignalExtractor:
         ):
             return True
 
-        # Real-estate-only content
-        real_estate_phrases = [
-            "office space for lease",
-            "office space for rent",
-            "commercial property",
-            "property for lease",
-            "property for rent",
-            "sq.ft",
-            "square feet",
+        supply_phrases = [
+            "property available",
+            "office available for lease",
+            "space available",
+            "market update",
+            "real estate news",
         ]
-
-        expansion_phrases = [
-            "expanding",
-            "expansion",
-            "new office",
-            "new facility",
-            "new campus",
-            "new headquarters",
-            "setting up",
-            "opening",
-            "relocating",
-            "hiring",
-            "growing",
+        demand_phrases = [
+            "looking for",
+            "seeking",
+            "requirement",
+            "need office space",
+            "looking to lease",
+            "client is looking for",
         ]
-
-        if any(
-            phrase in normalized
-            for phrase in real_estate_phrases
+        if any(phrase in normalized for phrase in supply_phrases) and not any(
+            phrase in normalized for phrase in demand_phrases
         ):
-
-            if not any(
-                phrase in normalized
-                for phrase in expansion_phrases
-            ):
-                return True
+            return True
 
         return False
+
+    @staticmethod
+    def _matches_target_location(text, target_location):
+        """Case-insensitive location gate, including Bangalore/Bengaluru."""
+        normalized = str(text).lower()
+        target = str(target_location).strip().lower()
+        if target in {"bangalore", "bengaluru"}:
+            return any(term in normalized for term in ("bangalore", "bengaluru"))
+        return target in normalized
 
     # ----------------------------------------
     # Gemini batch classifier
@@ -561,6 +585,8 @@ class SignalExtractor:
                 )
             )
 
+            target_location = discovery_result.get("target_location")
+
             candidate_blocks.append(
                 f"""
 CANDIDATE {index}
@@ -573,6 +599,9 @@ Discovery source:
 
 Discovery query:
 {discovery_query}
+
+Target location:
+{target_location}
 
 Post content:
 {candidate["text"]}
@@ -595,19 +624,16 @@ You receive multiple candidate social-media or web posts.
 For EACH candidate, determine whether it contains a genuine
 business expansion signal.
 
-Relevant signals include:
+Relevant signals include only demand-side commercial property requirements:
 
-- office expansion
-- new office
-- new headquarters
-- new facility
-- new campus
-- market expansion
-- geographic expansion
-- hiring expansion
-- GCC/GDC setup
-- relocation
-- operational expansion
+- office space requirement
+- retail space requirement
+- property requirement
+- commercial property requirement
+- space requirement
+
+The post should also contain a concrete property qualifier such as
+"sq ft", "sq. ft", "carpet area", or "frontage".
 
 IMPORTANT RULES:
 
@@ -620,7 +646,9 @@ IMPORTANT RULES:
 
 4. If the company cannot be determined, return null.
 
-5. Extract the location where the expansion is happening.
+5. Extract the location of the requirement. It is relevant only when it
+   matches the target location supplied with the candidate. Treat Bangalore
+   and Bengaluru as the same location.
 
 6. Distinguish planned, active and completed expansion.
 
@@ -633,9 +661,21 @@ IMPORTANT RULES:
    Do not use variants such as "planned_expansion" or
    "completed_expansion".
 
-7. A post merely advertising office space, real estate,
-   commercial property or leasing opportunities is NOT
-   a business expansion signal.
+7. Distinguish demand from supply. A post where a company,
+   brand, broker, or consultant is actively seeking a property
+   for a named business is a relevant commercial property
+   requirement. A post merely advertising available inventory,
+   "for lease" space, or market commentary is not relevant.
+
+   For demand-side requirement posts, signal_type should be
+   "commercial_property_requirement".
+
+   actor_type must be exactly one of:
+   - "DIRECT_OCCUPIER"
+   - "BROKER_CLIENT_REQUIREMENT"
+   - "PROPERTY_SUPPLY"
+   - "MARKET_COMMENTARY"
+   - "UNKNOWN"
 
 8. A post saying "if your company is expanding" is NOT
    evidence that the author's company is expanding.
@@ -708,6 +748,17 @@ Analyze the following candidate business signals.
                                 "nullable": True
                             },
 
+                            "actor_type": {
+                                "type": "STRING",
+                                "enum": [
+                                    "DIRECT_OCCUPIER",
+                                    "BROKER_CLIENT_REQUIREMENT",
+                                    "PROPERTY_SUPPLY",
+                                    "MARKET_COMMENTARY",
+                                    "UNKNOWN"
+                                ]
+                            },
+
                             "intent": {
                                 "type": "STRING",
                                 "enum": [
@@ -736,6 +787,7 @@ Analyze the following candidate business signals.
                             "signal_type",
                             "company_name",
                             "location",
+                            "actor_type",
                             "intent",
                             "confidence",
                             "evidence",
@@ -869,6 +921,10 @@ Analyze the following candidate business signals.
             )
         )
 
+        actor_type = str(signal.get("actor_type") or "UNKNOWN").upper()
+        if actor_type in {"PROPERTY_SUPPLY", "MARKET_COMMENTARY"}:
+            return None
+
         confidence = (
             signal.get(
                 "confidence"
@@ -980,6 +1036,7 @@ Analyze the following candidate business signals.
             "signal_type": signal_type,
             "company_name": company_name,
             "location": location,
+            "actor_type": actor_type,
             "intent": intent,
             "recency": recency,
             "confidence": confidence,
@@ -1200,3 +1257,4 @@ Analyze the following candidate business signals.
             )
 
         return unique
+

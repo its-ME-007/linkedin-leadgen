@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Lead Engine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i data-lucide="radar"></i>
+                <span>Brand Intel</span>
+            </div>
+            
+            <form id="discovery-form" class="discovery-form">
+                <h3>Find active property requirements</h3>
+                
+                <div class="form-group">
+                    <label for="location">Location Focus</label>
+                    <div class="input-icon">
+                        <i data-lucide="map-pin"></i>
+                        <input type="text" id="location" placeholder="e.g., Bengaluru" value="Bengaluru" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Search intent</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="signal" value="commercial_property_requirement" checked>
+                            <span class="custom-checkbox"></span>
+                            Commercial property requirement
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" id="submit-btn" class="btn-primary">
+                    <span class="btn-text">Run Discovery Waterfall</span>
+                    <i data-lucide="play" class="btn-icon"></i>
+                    <div class="spinner hidden"></div>
+                </button>
+            </form>
+            
+            <div class="pipeline-status" id="pipeline-status">
+                <h4>Pipeline Status</h4>
+                <div class="status-steps">
+                    <div class="step pending" id="step-discovery">1. Opportunity Discovery</div>
+                    <div class="step pending" id="step-signals">2. Signal Extraction</div>
+                    <div class="step pending" id="step-companies">3. Company Enrichment</div>
+                    <div class="step pending" id="step-execs">4. People Discovery &amp; Storage</div>
+                    <div class="step pending" id="step-contacts">5. Contact Search (on demand)</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="topbar">
+                <h1>Discovery Dashboard</h1>
+                <div class="stats-overview">
+                    <div class="stat-card">
+                        <span class="stat-value" id="stat-signals">0</span>
+                        <span class="stat-label">Signals</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="stat-companies">0</span>
+                        <span class="stat-label">Companies</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="stat-people">0</span>
+                        <span class="stat-label">Execs</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="stat-contacts">0</span>
+                        <span class="stat-label">Contacts</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Dynamic Kanban-style Results -->
+            <div class="results-board">
+                
+                <!-- Signals Column -->
+                <div class="board-column">
+                    <div class="column-header">
+                        <h2><i data-lucide="radio"></i> Qualified Signals</h2>
+                    </div>
+                    <div class="column-content" id="signals-container">
+                        <div class="empty-state">No signals discovered yet.</div>
+                    </div>
+                </div>
+                
+                <!-- Companies Column -->
+                <div class="board-column">
+                    <div class="column-header">
+                        <h2><i data-lucide="building-2"></i> Companies</h2>
+                    </div>
+                    <div class="column-content" id="companies-container">
+                        <div class="empty-state">Waiting for signals...</div>
+                    </div>
+                </div>
+                
+                <!-- People & Contacts Column -->
+                <div class="board-column">
+                    <div class="column-header">
+                        <h2><i data-lucide="users"></i> Key Executives</h2>
+                    </div>
+                    <div class="column-content" id="people-container">
+                        <div class="empty-state">Waiting for companies...</div>
+                    </div>
+                </div>
+                
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals for details if needed later -->
+
+    <script src="/static/app.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
