@@ -10,11 +10,20 @@ import re
 @dataclass(frozen=True)
 class LinkedInDiscoveryConfig:
     hashtags: tuple[str, ...] = (
-        "#PropertyRequirement",
-        "#PropertyWanted",
-        "#CommercialProperty",
+    "#PropertyRequirement",
+    "#PropertyWanted",
+    "#CommercialProperty",
+    "#CommercialPropertyRequirement",
+    "#PropertyRequired",
+    "#SpaceRequirement",
+    "#OfficeSpaceRequirement",
+    "#OfficeRequirement",
+    "#CommercialSpaceRequirement",
+    "#RetailSpaceRequirement",
+    "#OfficeSpaceWanted",
+    "#CommercialSpaceWanted",
     )
-    max_pages_per_hashtag: int = 5
+    max_pages_per_hashtag: int = 4
     raw_output_dir: Path | None = None
 
 
@@ -197,6 +206,19 @@ class DiscoveryService:
             lines = block.splitlines()
             author = lines[0].strip() if lines else ""
 
+            # Extract author company/title from the header
+            author_company = None
+            for i in range(1, min(5, len(lines))):
+                line = lines[i].strip()
+                if line and not line.startswith('•') and '@' not in line and line != "":
+                    # Look for "at CompanyName" or "CompanyName |" patterns
+                    if ' at ' in line:
+                        author_company = line.split(' at ', 1)[1].split('\n')[0].strip()
+                        break
+                    elif '|' in line:
+                        author_company = line.split('|')[0].strip()
+                        break
+
             # Strip the LinkedIn card header: everything up to and including
             # the "Follow" or "Connect" call-to-action line that precedes the
             # post body.
@@ -219,8 +241,9 @@ class DiscoveryService:
                     "text": body,
                     "url": url,
                     "author": author or None,
+                    "author_company": author_company,
                     "timestamp": None,
-                    "raw": {"author": author, "text": body},
+                    "raw": {"author": author, "author_company": author_company, "text": body},
                 }
             )
 

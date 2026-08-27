@@ -6,9 +6,7 @@ from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 
-
 load_dotenv()
-
 
 class SignalExtractor:
     """
@@ -32,7 +30,7 @@ class SignalExtractor:
     deterministic filtering is performed before the API call.
     """
 
-    DEFAULT_MODEL = "gemini-3.1-flash-lite"
+    DEFAULT_MODEL = "gemini-2.0-flash-lite"
     DEFAULT_BATCH_SIZE = 4
 
     # ----------------------------------------
@@ -42,7 +40,8 @@ class SignalExtractor:
     def __init__(
         self,
         model=None,
-        batch_size=None
+        batch_size=None,
+        web_search_service=None
     ):
 
         self.model = (
@@ -85,11 +84,14 @@ class SignalExtractor:
             api_key=api_key
         )
 
+        # Optional web search provider for company name enrichment.
+        self.web_search = web_search_service
+
     # ----------------------------------------
     # Public extraction method
     # ----------------------------------------
 
-    def extract(
+    async def extract(
         self,
         discovery_results
     ):
@@ -256,7 +258,14 @@ class SignalExtractor:
                     )
 
         # ----------------------------------------
-        # Step 4: Deduplicate
+        # Step 4: Enrich missing company names via web search
+        # ----------------------------------------
+
+        if self.web_search and signals:
+            signals = await self._enrich_company_names(signals)
+
+        # ----------------------------------------
+        # Step 5: Deduplicate
         # ----------------------------------------
 
         return self._deduplicate(
@@ -357,6 +366,12 @@ class SignalExtractor:
                             ),
                             "url": item.get(
                                 "url"
+                            ),
+                            "author": item.get(
+                                "author"
+                            ),
+                            "author_company": item.get(
+                                "author_company"
                             ),
                             "kind": item.get(
                                 "kind"
@@ -632,9 +647,6 @@ Relevant signals include only demand-side commercial property requirements:
 - commercial property requirement
 - space requirement
 
-The post should also contain a concrete property qualifier such as
-"sq ft", "sq. ft", "carpet area", or "frontage".
-
 IMPORTANT RULES:
 
 1. Extract the COMPANY actually associated with the expansion.
@@ -646,9 +658,10 @@ IMPORTANT RULES:
 
 4. If the company cannot be determined, return null.
 
-5. Extract the location of the requirement. It is relevant only when it
-   matches the target location supplied with the candidate. Treat Bangalore
-   and Bengaluru as the same location.
+5. Extract the location of the requirement from the post text.
+   The target location is provided as context only — do not reject a post
+   solely because it is not in the target location.
+   Treat Bangalore and Bengaluru as the same location.
 
 6. Distinguish planned, active and completed expansion.
 
@@ -882,7 +895,7 @@ Analyze the following candidate business signals.
 
             return []
 
-    # ----------------------------------------
+        # ----------------------------------------
     # Normalize signal
     # ----------------------------------------
 
@@ -914,6 +927,26 @@ Analyze the following candidate business signals.
                 "company_name"
             )
         )
+
+        # Fallback to post author's company if no company extracted by Gemini
+        # If author_company is also null, use the author name as the fallback
+        if not company_name:
+            author_company = (
+                post.get("author_company")
+                if isinstance(post, dict)
+                else None
+            )
+            if author_company:
+                company_name = author_company
+            else:
+                # Final fallback: use author name if no company found
+                author = (
+                    post.get("author")
+                    if isinstance(post, dict)
+                    else None
+                )
+                if author:
+                    company_name = author
 
         location = (
             signal.get(
@@ -1258,3 +1291,98 @@ Analyze the following candidate business signals.
 
         return unique
 
+    # ----------------------------------------
+    # Web search company name enrichment
+    # ----------------------------------------
+
+    async def _enrich_company_names(
+        self,
+        signals
+    ):
+        """
+        For any signal where company_name is null, attempt to resolve
+        the company name using a web search based on the post author
+        name and post evidence text.
+
+        Uses the first plausible organisation name from the search
+        snippet. Falls back gracefully if no result is found.
+        """
+        enriched = []
+
+        for signal in signals:
+            if signal.get("company_name"):
+                enriched.append(signal)
+                continue
+
+            # Build a targeted search query from the evidence
+            evidence = signal.get("evidence", {})
+            if isinstance(evidence, dict):
+                evidence_text = evidence.get("text", "")
+            else:
+                evidence_text = str(evidence or "")
+
+            author = ""
+            source_url = signal.get("source_url", "") or ""
+            if "linkedin.com/in/" in source_url or source_url.startswith("/in/"):
+                # Extract username from URL as a proxy for author
+                author = source_url.rstrip("/").split("/")[-1].replace("-", " ")
+
+            query_parts = []
+            if author:
+                query_parts.append(author)
+            # Use the first 100 chars of evidence as context
+            snippet = evidence_text[:100].strip()
+            if snippet:
+                query_parts.append(snippet)
+            query_parts.append("company LinkedIn")
+
+            search_query = " ".join(query_parts)[:200]
+
+            try:
+                result = await self.web_search.search(search_query)
+
+                # BraveSearchService returns {"results": [...]}
+                results_list = result.get("results", [])
+                company_name = None
+
+                for item in results_list[:3]:
+                    title = item.get("title", "")
+                    description = item.get("description", "") or item.get("snippet", "")
+                    # Look for a company name pattern: capitalised words or
+                    # LinkedIn "X at CompanyName" patterns
+                    match = re.search(
+                        r"\bat\s+([A-Z][A-Za-z0-9 &.,'-]{2,40})",
+                        title + " " + description
+                    )
+                    if match:
+                        company_name = match.group(1).strip(" .,")
+                        break
+
+                if company_name:
+                    print(
+                        f"[ENRICHMENT] Resolved company: "
+                        f"{company_name!r} for signal "
+                        f"(source_url={source_url})"
+                    )
+                    signal = dict(signal)
+                    signal["company_name"] = company_name
+                    # Re-derive status now that we have a company name
+                    signal["status"] = self._derive_status(
+                        intent=signal.get("intent", "unknown"),
+                        confidence=signal.get("confidence", 0.0),
+                        company_name=company_name,
+                    )
+                else:
+                    print(
+                        f"[ENRICHMENT] Could not resolve company "
+                        f"for source_url={source_url}"
+                    )
+
+            except Exception as exc:
+                print(
+                    f"[ENRICHMENT ERROR] {type(exc).__name__}: {exc}"
+                )
+
+            enriched.append(signal)
+
+        return enriched

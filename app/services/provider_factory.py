@@ -45,7 +45,8 @@ def create_providers():
     # -------------------------
     gemini_api_key = os.getenv("GEMINI_API_KEY")
     if gemini_api_key:
-        providers["signal_extractor"] = SignalExtractor()
+        web_search = web_search_providers[0] if web_search_providers else None
+        providers["signal_extractor"] = SignalExtractor(web_search_service = web_search)
         
     # -------------------------
     # LinkedIn MCP

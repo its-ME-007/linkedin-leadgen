@@ -2,9 +2,9 @@ import json
 from pathlib import Path
 
 from app.services.signal_extractor import SignalExtractor
+import asyncio
 
-
-def main():
+async def main():
 
     # ----------------------------------------
     # Load saved discovery output
@@ -47,7 +47,7 @@ def main():
 
     extractor = SignalExtractor()
 
-    signals = extractor.extract(
+    signals = await extractor.extract(
         discovery_results
     )
 
@@ -263,4 +263,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
