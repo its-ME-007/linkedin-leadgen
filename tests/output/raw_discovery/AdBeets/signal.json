@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "AdBeets",
+    "location": "Hyderabad",
+    "actor_type": "DIRECT_OCCUPIER",
+    "intent": "active",
+    "recency": null,
+    "confidence": 1.0,
+    "status": "qualified",
+    "evidence": {
+        "text": "We’ve reached that stage at AdBeets where our ideas don’t fit inside our current walls anymore... I’m searching for a space",
+        "reason": "The company is actively searching for a new office space to accommodate growth."
+    },
+    "source": "linkedin",
+    "source_url": "/in/sowmya-erothu-39926917b/",
+    "discovery_query": "#OfficeSpaceRequirement",
+    "_author_name": "Sowmya Erothu",
+    "_author_url": "/in/sowmya-erothu-39926917b/"
+}

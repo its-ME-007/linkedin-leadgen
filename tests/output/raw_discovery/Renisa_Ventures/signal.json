@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "Renisa Ventures",
+    "location": null,
+    "actor_type": "BROKER_CLIENT_REQUIREMENT",
+    "intent": "active",
+    "recency": null,
+    "confidence": 1.0,
+    "status": "qualified",
+    "evidence": {
+        "text": "Looking out for a commercial space/office space for one of our Corporate clients",
+        "reason": "A broker is posting a specific requirement on behalf of an unnamed corporate client."
+    },
+    "source": "linkedin",
+    "source_url": "/company/renisa-ventures/",
+    "discovery_query": "#CommercialSpaceRequirement",
+    "_author_name": "Renisa Ventures",
+    "_author_url": "/company/renisa-ventures/"
+}

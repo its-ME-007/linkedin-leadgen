@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "Business Sales",
+    "location": "Islamabad",
+    "actor_type": "DIRECT_OCCUPIER",
+    "intent": "active",
+    "recency": null,
+    "confidence": 1.0,
+    "status": "qualified",
+    "evidence": {
+        "text": "1000 Sft Office Space Required for Software House",
+        "reason": "A software house is seeking office space."
+    },
+    "source": "linkedin",
+    "source_url": "/in/shah-ayaz-bin-khalifa-8ab372171/",
+    "discovery_query": "#OfficeSpaceWanted",
+    "_author_name": "Shah Ayaz Bin Khalifa",
+    "_author_url": "/in/shah-ayaz-bin-khalifa-8ab372171/"
+}

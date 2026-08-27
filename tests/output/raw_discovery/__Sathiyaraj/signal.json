@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "# Sathiyaraj",
+    "location": "Chennai",
+    "actor_type": "BROKER_CLIENT_REQUIREMENT",
+    "intent": "active",
+    "recency": null,
+    "confidence": 0.9,
+    "status": "qualified",
+    "evidence": {
+        "text": "A Reputed International Hotel Chain is actively seeking to acquire a premium beachfront land parcel on East Coast Road (ECR), Chennai",
+        "reason": "A broker is representing a client seeking commercial property for a hotel development."
+    },
+    "source": "linkedin",
+    "source_url": "/in/sathiya-raj-84308b3a5/",
+    "discovery_query": "#PropertyRequirement",
+    "_author_name": "sathiya raj",
+    "_author_url": "/in/sathiya-raj-84308b3a5/"
+}

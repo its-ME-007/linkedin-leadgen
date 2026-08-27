@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "Fincore",
+    "location": "Mumbai",
+    "actor_type": "DIRECT_OCCUPIER",
+    "intent": "active",
+    "recency": null,
+    "confidence": 1.0,
+    "status": "qualified",
+    "evidence": {
+        "text": "We are immediately looking to lease a Pre-Leased Commercial Office Building to support our next phase of growth.",
+        "reason": "The company is explicitly stating a requirement for a commercial office building."
+    },
+    "source": "linkedin",
+    "source_url": "/in/jr1980/",
+    "discovery_query": "#CommercialSpaceRequirement",
+    "_author_name": "Joydiup R.",
+    "_author_url": "/in/jr1980/"
+}

@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "Orimark Properties",
+    "location": "Janpath",
+    "actor_type": "BROKER_CLIENT_REQUIREMENT",
+    "intent": "active",
+    "recency": null,
+    "confidence": 0.9,
+    "status": "qualified",
+    "evidence": {
+        "text": "This requirement is for 5,000 sq. ft. at Janpath",
+        "reason": "A broker representing a bank's office space requirement."
+    },
+    "source": "linkedin",
+    "source_url": "/company/orimarkproperties/",
+    "discovery_query": "#OfficeSpaceRequirement",
+    "_author_name": "Orimark Properties",
+    "_author_url": "/company/orimarkproperties/"
+}

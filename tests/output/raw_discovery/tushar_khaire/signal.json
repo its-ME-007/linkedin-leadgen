@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "tushar khaire",
+    "location": "Mumbai, Navi Mumbai, Thane",
+    "actor_type": "BROKER_CLIENT_REQUIREMENT",
+    "intent": "active",
+    "recency": null,
+    "confidence": 0.8,
+    "status": "qualified",
+    "evidence": {
+        "text": "We are actively seeking commercial and industrial properties across Mumbai, Navi Mumbai and Thane for qualified requirements.",
+        "reason": "The author is a broker/agent seeking properties for client requirements."
+    },
+    "source": "linkedin",
+    "source_url": "/in/tushar-khaire-23b1ba374/",
+    "discovery_query": "#PropertyRequirement",
+    "_author_name": "tushar khaire",
+    "_author_url": "/in/tushar-khaire-23b1ba374/"
+}

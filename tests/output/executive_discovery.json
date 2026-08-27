@@ -1,0 +1,48 @@
+{
+    "input_signal_count": 2,
+    "company_count": 2,
+    "results": [
+        {
+            "signal": {
+                "signal_type": "commercial_property_requirement",
+                "company_name": "Namaste Pizza",
+                "location": "Goa",
+                "actor_type": "UNKNOWN",
+                "intent": "active",
+                "recency": null,
+                "confidence": 0.9,
+                "status": "qualified",
+                "evidence": {
+                    "text": "We are looking for prime retail properties in Goa for upcoming store expansion.",
+                    "reason": "The post explicitly states a requirement for retail space for store expansion, though the company name is not disclosed."
+                },
+                "source": "linkedin",
+                "source_url": "/in/sumit9991/",
+                "discovery_query": "#PropertyRequirement"
+            },
+            "executives": [],
+            "executive_count": 0
+        },
+        {
+            "signal": {
+                "signal_type": "commercial_property_requirement",
+                "company_name": "# Sathiyaraj",
+                "location": "East Coast Road (ECR), Chennai",
+                "actor_type": "BROKER_CLIENT_REQUIREMENT",
+                "intent": "active",
+                "recency": null,
+                "confidence": 0.9,
+                "status": "qualified",
+                "evidence": {
+                    "text": "A Reputed International Hotel Chain is actively seeking to acquire a premium beachfront land parcel on East Coast Road (ECR), Chennai",
+                    "reason": "A broker is representing a client (hotel chain) seeking property for development."
+                },
+                "source": "linkedin",
+                "source_url": "/in/sathiya-raj-84308b3a5/",
+                "discovery_query": "#PropertyRequirement"
+            },
+            "executives": [],
+            "executive_count": 0
+        }
+    ]
+}

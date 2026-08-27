@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "Ranvijay Singh",
+    "location": "Uttar Pradesh",
+    "actor_type": "BROKER_CLIENT_REQUIREMENT",
+    "intent": "active",
+    "recency": null,
+    "confidence": 0.9,
+    "status": "qualified",
+    "evidence": {
+        "text": "We are partnering with a startup client that is actively seeking retail space of 6,000–7,500 sq. ft.",
+        "reason": "Duplicate of candidate 16, broker representing a client."
+    },
+    "source": "linkedin",
+    "source_url": "/in/ranvijay-singh-909b40177/",
+    "discovery_query": "#SpaceRequirement",
+    "_author_name": "Ranvijay Singh",
+    "_author_url": "/in/ranvijay-singh-909b40177/"
+}

@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "Iconiq One Realty",
+    "location": "Mount Lavinia or Rathmalana",
+    "actor_type": "BROKER_CLIENT_REQUIREMENT",
+    "intent": "active",
+    "recency": null,
+    "confidence": 1.0,
+    "status": "qualified",
+    "evidence": {
+        "text": "WE’RE LOOKING FOR A COMMERCIAL PROPERTY ON LEASE!",
+        "reason": "A real estate agency (Iconiq One Realty) is looking for a property on behalf of a client."
+    },
+    "source": "linkedin",
+    "source_url": "/company/iconiqonerealty/",
+    "discovery_query": "#CommercialSpaceWanted",
+    "_author_name": "Iconiq One Realty",
+    "_author_url": "/company/iconiqonerealty/"
+}

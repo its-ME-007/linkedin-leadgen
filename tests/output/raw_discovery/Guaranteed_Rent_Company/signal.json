@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "Guaranteed Rent Company",
+    "location": "Thurrock, Basildon, Southend, Havering, Brentwood",
+    "actor_type": "DIRECT_OCCUPIER",
+    "intent": "active",
+    "recency": null,
+    "confidence": 0.9,
+    "status": "qualified",
+    "evidence": {
+        "text": "At Guaranteed Rent Company, we're actively looking for... Selected commercial properties",
+        "reason": "The company is explicitly seeking commercial properties for their business model."
+    },
+    "source": "linkedin",
+    "source_url": "/company/ecouniverseltd/",
+    "discovery_query": "#PropertyWanted",
+    "_author_name": "Guaranteed Rent Company",
+    "_author_url": "/company/ecouniverseltd/"
+}

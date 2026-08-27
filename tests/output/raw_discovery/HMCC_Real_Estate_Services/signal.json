@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "HMCC Real Estate Services",
+    "location": "Karachi",
+    "actor_type": "BROKER_CLIENT_REQUIREMENT",
+    "intent": "active",
+    "recency": null,
+    "confidence": 0.9,
+    "status": "qualified",
+    "evidence": {
+        "text": "HMCC Real Estate Services is currently seeking residential properties meeting the following criteria",
+        "reason": "The broker is seeking properties for clients."
+    },
+    "source": "linkedin",
+    "source_url": "/company/hmccestate/",
+    "discovery_query": "#PropertyRequired",
+    "_author_name": "HMCC Real Estate",
+    "_author_url": "/company/hmccestate/"
+}

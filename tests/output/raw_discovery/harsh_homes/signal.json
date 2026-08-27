@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "harsh homes",
+    "location": "Mumbai",
+    "actor_type": "BROKER_CLIENT_REQUIREMENT",
+    "intent": "active",
+    "recency": null,
+    "confidence": 0.9,
+    "status": "qualified",
+    "evidence": {
+        "text": "REQUIRED ON RENT FOR CAFE – BANDRA WEST / KHAR WEST",
+        "reason": "A specific requirement for cafe space."
+    },
+    "source": "linkedin",
+    "source_url": "/in/ganesh-diwakar-4b053572/",
+    "discovery_query": "#PropertyRequired",
+    "_author_name": "Ganesh Diwakar",
+    "_author_url": "/in/ganesh-diwakar-4b053572/"
+}

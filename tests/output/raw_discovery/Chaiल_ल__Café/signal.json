@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "Chaiलीला Café",
+    "location": "Jhansi",
+    "actor_type": "DIRECT_OCCUPIER",
+    "intent": "active",
+    "recency": null,
+    "confidence": 0.9,
+    "status": "qualified",
+    "evidence": {
+        "text": "We are exploring premium commercial properties in Jhansi for our upcoming Chaiलीला Café outlet",
+        "reason": "A direct expansion requirement for a cafe."
+    },
+    "source": "linkedin",
+    "source_url": "/in/rajatsadh11/",
+    "discovery_query": "#PropertyRequired",
+    "_author_name": "Rajat Sadh",
+    "_author_url": "/in/rajatsadh11/"
+}

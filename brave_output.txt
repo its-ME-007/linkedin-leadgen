@@ -1,0 +1,746 @@
+C:\Users\Lenovo\AppData\Local\uv\cache\archive-v0\tVbj6vIBuTTE--s8BAU05\Lib\site-packages\fastmcp\tools\base.py:281: FastMCPDeprecationWarning: The `exclude_args` parameter is deprecated as of FastMCP 2.14. Use dependency injection with `Depends()` instead for better lifecycle management. See https://gofastmcp.com/servers/dependency-injection#using-depends for examples.
+  return FunctionTool.from_function(
+
+
++-----------------------------------------------------------------------------+
+|                                                                             |
+|                                                                             |
+|                        \u2584\u2580\u2580 \u2584\u2580\u2588 \u2588\u2580\u2580 \u2580\u2588\u2580 \u2588\u2580\u2584\u2580\u2588 \u2588\u2580\u2580 \u2588\u2580\u2588                        |
+|                        \u2588\u2580  \u2588\u2580\u2588 \u2584\u2584\u2588  \u2588  \u2588 \u2580 \u2588 \u2588\u2584\u2584 \u2588\u2580\u2580                        |
+|                                                                             |
+|                                                                             |
+|                                                                             |
+|                                FastMCP 3.4.7                                |
+|                            https://gofastmcp.com                            |
+|                                                                             |
+|                 \U0001f5a5  Server:      mcp-server-linkedin, 4.23.1                 |
+|                 \U0001f680 Deploy free: https://horizon.prefect.io                  |
+|                                                                             |
++-----------------------------------------------------------------------------+
+
+
+[08/27/26 19:45:14] INFO     Starting MCP server               transport.py:241
+                             'mcp-server-linkedin' with                        
+                             transport 'stdio'                                 
+                    WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+[08/27/26 19:45:16] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+[08/27/26 19:45:18] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+[08/27/26 19:45:20] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+[08/27/26 19:45:22] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+[08/27/26 19:45:25] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+[08/27/26 19:45:27] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+[08/27/26 19:45:29] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+[08/27/26 19:45:31] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+==============================
+EXECUTIVE DISCOVERY TEST
+==============================
+Qualified signals loaded: 22
+
+Connecting to LinkedIn MCP...
+Connected.
+
+
+------------------------------
+Signal 1/22
+Company: Namaste Pizza
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\Namaste_Pizza\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\Namaste_Pizza\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "Namaste Pizza" "Goa" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 0 people
+[EXECUTIVE DISCOVERY] No people discovered from any source.
+[EXECUTIVE DISCOVERY] Unique discovered people: 0
+
+Executives found: 0
+
+------------------------------
+Signal 2/22
+Company: # Sathiyaraj
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\__Sathiyaraj\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\__Sathiyaraj\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "# Sathiyaraj" "Chennai" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 0 people
+[EXECUTIVE DISCOVERY] No people discovered from any source.
+[EXECUTIVE DISCOVERY] Unique discovered people: 0
+
+Executives found: 0
+
+------------------------------
+Signal 3/22
+Company: tushar khaire
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\tushar_khaire\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\tushar_khaire\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "tushar khaire" "Mumbai, Navi Mumbai, Thane" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 0 people
+[EXECUTIVE DISCOVERY] No people discovered from any source.
+[EXECUTIVE DISCOVERY] Unique discovered people: 0
+
+Executives found: 0
+
+------------------------------
+Signal 4/22
+Company: Rob Andrasz
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\Rob_Andrasz\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\Rob_Andrasz\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "Rob Andrasz" "London, Essex, Surrey" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 0 people
+[EXECUTIVE DISCOVERY] No people discovered from any source.
+[EXECUTIVE DISCOVERY] Unique discovered people: 0
+
+Executives found: 0
+
+------------------------------
+Signal 5/22
+Company: Guaranteed Rent Company
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\Guaranteed_Rent_Company\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\Guaranteed_Rent_Company\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "Guaranteed Rent Company" "Thurrock, Basildon, Southend, Havering, Brentwood" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 0 people
+[EXECUTIVE DISCOVERY] No people discovered from any source.
+[EXECUTIVE DISCOVERY] Unique discovered people: 0
+
+Executives found: 0
+
+------------------------------
+Signal 6/22
+Company: sethghanshyam yadav
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\sethghanshyam_yadav\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\sethghanshyam_yadav\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "sethghanshyam yadav" "Hyderabad" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 1 people
+[EXECUTIVE DISCOVERY] Unique discovered people: 1
+[EXECUTIVE DISCOVERY] Keeping 1 broader web-discovered candidate(s) for review.
+
+Executives found: 1
+  [2] sethghanshyam yadav | Managing Director
+      Headline: Property Details: - Type: West-facing 400 Square Yard Plot - Price: ?65,000 Per Yard (By Owner) - Dimensions: 60x60 (Square Shape) - Road Width: 40 Feet Wide Road - Category: Semi-commercial Plot with high investment potential ? Location Highlights: - Situated in: Sainikpuri, Hyderabad (Maithri Enclave, Kapra Municipality) - Prime Location: Suitable for both commercial and residential development - Accessibility: Convenient access to major roads and bustling neighborhoods ? Why Invest? - Ideal for Builders: Perfect for constructing square-shaped plots - Great Value: Excellent opportunity for semi-commercial developments with promising returns ? For More Details: - Contact: Ghanshyam at 7013713311 ? Visit Us: IndiaPropertyAds.com Stay updated with the latest property listings and news by subscribing to our [YouTube Channel](https://youtube.com/@indiapropertyads).
+      LinkedIn: https://www.linkedin.com/in/sethghanshyam-yadav-bb3aa5159/
+      Matched title: Managing Director
+      Confidence: 0.82
+      Source: google_xray
+
+------------------------------
+Signal 7/22
+Company: HMCC Real Estate Services
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\HMCC_Real_Estate_Services\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\HMCC_Real_Estate_Services\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "HMCC Real Estate Services" "Karachi" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 0 people
+[EXECUTIVE DISCOVERY] No people discovered from any source.
+[EXECUTIVE DISCOVERY] Unique discovered people: 0
+
+Executives found: 0
+
+------------------------------
+Signal 8/22
+Company: Rajeev Gupta
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\Rajeev_Gupta\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\Rajeev_Gupta\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "Rajeev Gupta" "Delhi, Gurgaon, Noida, Ghaziabad, Faridabad" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 0 people
+[EXECUTIVE DISCOVERY] No people discovered from any source.
+[EXECUTIVE DISCOVERY] Unique discovered people: 0
+
+Executives found: 0
+
+------------------------------
+Signal 9/22
+Company: Pankaj Agarwal
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\Pankaj_Agarwal\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\Pankaj_Agarwal\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "Pankaj Agarwal" "Indore" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 4 people
+[EXECUTIVE DISCOVERY] Unique discovered people: 4
+[EXECUTIVE DISCOVERY] Keeping 4 broader web-discovered candidate(s) for review.
+
+Executives found: 4
+  [1] Pankaj Agarwal | None
+[08/27/26 19:45:33] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+[08/27/26 19:45:35] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+[08/27/26 19:45:37] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+[08/27/26 19:45:39] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+      Headline: Pankaj can introduce you to 10+ people at Resonance Eduventures Limited ... By clicking Continue to join or sign in, you agree to LinkedInÆs User Agreement, Privacy Policy, and Cookie Policy. ... By clicking Continue to join or sign in, you agree to LinkedInÆs User Agreement, Privacy Policy, and Cookie Policy. ... IILM Institute for higher education, Gurgaon.
+      LinkedIn: https://www.linkedin.com/in/pankaj-agarwal-53a75416/
+      Matched title: COO
+      Confidence: 0.76
+      Source: google_xray
+  [3] Pankaj Agarwal | None
+      Headline: Additionally, I enjoy mentoring ... promote growth and knowledge sharing. Let&#x27;s connect! IÆm always open to discussing new opportunities and innovative mobile development projects. ╖ Experience: Webriders ╖ Location: Indore ╖ 24 connections on LinkedIn. View Pankaj AgarwalÆs profile ...
+      LinkedIn: https://www.linkedin.com/in/pankaj-agarwal-10821a28a/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Pankaj Agarwal | None
+      Headline: DonÆt have the app? Get it in the Microsoft Store. Open the app ╖ Pankaj can introduce you to 10+ people at Agarwal Coal Corporation Pvt Ltd
+      LinkedIn: https://www.linkedin.com/in/pankaj-agarwal-82370627b/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Pankaj Agarwal | After two unforgettable years, IÆm moving on from Allen, closing an incredible chapter filled with learning, growth, and impact. When I firstà ╖ ? Stepping into the world of entertainment + marketing! Thrilled to kickstart my new journey as a Social Media Marketing Intern at JioHotstar thisà ╖ I am excited to share that I ve completed the Management Program in Strategy and Leadership for Senior Professionals from IIM Indore.
+      Headline: After two unforgettable years, IÆm moving on from Allen, closing an incredible chapter filled with learning, growth, and impact. When I firstà ╖ ? Stepping into the world of entertainment + marketing! Thrilled to kickstart my new journey as a Social Media Marketing Intern at JioHotstar thisà ╖ I am excited to share that I ve completed the Management Program in Strategy and Leadership for Senior Professionals from IIM Indore.
+      LinkedIn: https://www.linkedin.com/in/pankaj-agarwal-a3a6aa87/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+
+------------------------------
+Signal 10/22
+Company: harsh homes
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\harsh_homes\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\harsh_homes\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "harsh homes" "Mumbai" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 0 people
+[EXECUTIVE DISCOVERY] No people discovered from any source.
+[EXECUTIVE DISCOVERY] Unique discovered people: 0
+
+Executives found: 0
+
+------------------------------
+Signal 11/22
+Company: Chai???? CafΘ
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\Chai?_?__CafΘ\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\Chai?_?__CafΘ\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "Chai???? CafΘ" "Jhansi" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 0 people
+[EXECUTIVE DISCOVERY] No people discovered from any source.
+[EXECUTIVE DISCOVERY] Unique discovered people: 0
+
+Executives found: 0
+
+------------------------------
+Signal 12/22
+Company: Shivanshi Awasthi
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\Shivanshi_Awasthi\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\Shivanshi_Awasthi\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "Shivanshi Awasthi" "Uttar Pradesh" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 1 people
+[EXECUTIVE DISCOVERY] Unique discovered people: 1
+[EXECUTIVE DISCOVERY] Keeping 1 broader web-discovered candidate(s) for review.
+
+Executives found: 1
+  [3] Shivanshi Awasthi | Relationship Manager
+      Headline: The manner and scale at which Indian elections are conducted is a masterclass in democracy and management rolled into one. Yesterday, as I got inà ... Lucknow, the capital of Uttar Pradesh, is fast becoming a prime destination for real estate investment, driven by its evolving infrastructureà
+      LinkedIn: https://www.linkedin.com/in/shivanshi-awasthi-a78b4a1b7/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+
+------------------------------
+Signal 13/22
+Company: Ranvijay Singh
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\Ranvijay_Singh\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\Ranvijay_Singh\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "Ranvijay Singh" "Uttar Pradesh" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 14 people
+[EXECUTIVE DISCOVERY] Unique discovered people: 14
+[EXECUTIVE DISCOVERY] Keeping 14 broader web-discovered candidate(s) for review.
+
+Executives found: 14
+  [2] Ranvijay Singh, FRM (P1) | liked this ╖ We are pleased to welcome D.K. Arjwani, Zonal Head (General Manager), Central Bank of India, Lucknow, Uttar Pradesh, as a Key Speaker at the ???????? ????? &amp; ????????? ?????? û ????? ???????.
+      Headline: Ranvijay Singh, FRM (P1) liked this ╖ We are pleased to welcome D.K. Arjwani, Zonal Head (General Manager), Central Bank of India, Lucknow, Uttar Pradesh, as a Key Speaker at the ???????? ????? &amp; ????????? ?????? û ????? ???????.
+      LinkedIn: None
+      Matched title: General Manager
+      Confidence: 0.82
+      Source: google_xray
+  [3] Ranvijay Singh | I&#x27;m  Rana. I have 2 year 6 months experience. currently working with infinite computer solutions for philips I have done my graduation bachelor of technology computer science
+      Headline: I&#x27;m Ranvijay Singh Rana. I have 2 year 6 months experience. currently working with infinite computer solutions for philips I have done my graduation bachelor of technology computer science
+      LinkedIn: https://www.linkedin.com/in/ranvijays243/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Ranvijay Singh | None
+      Headline: Location: Kanpur Nagar ╖ 51 connections on LinkedIn. View Ranvijay SinghÆs profile on LinkedIn, a professional community of 1 billion members.
+      LinkedIn: https://www.linkedin.com/in/ranvijay-singh-911718182/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Ranvijay Singh | Liked by  ╖ Job description Zonal &amp; Regional Business Managers Jobs in Chandigarh/Gurgaon/Jaipur/Jalandhar/Amritsar/Lucknow/Dehradun Requires Zonal &amp; Regionalà ╖ Hi, I am looking Regional Manager for....!!! Uttar Pradesh east (Lucknow/Kanpur) Uttrakhand Rajasthan Punjab Haryana Rgds Shailesh M-9536900371à
+      Headline: Liked by Ranvijay Singh ╖ Job description Zonal &amp; Regional Business Managers Jobs in Chandigarh/Gurgaon/Jaipur/Jalandhar/Amritsar/Lucknow/Dehradun Requires Zonal &amp; Regionalà ╖ Hi, I am looking Regional Manager for....!!! Uttar Pradesh east (Lucknow/Kanpur) Uttrakhand Rajasthan Punjab Haryana Rgds Shailesh M-9536900371à
+      LinkedIn: https://www.linkedin.com/in/ranvijay-singh-37233219/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Ranvijay Singh | Director ╖ Location: Varanasi ╖ 86 connections on LinkedIn. View Æs profile on LinkedIn, a professional community of 1 billion members.
+      Headline: Director ╖ Location: Varanasi ╖ 86 connections on LinkedIn. View Ranvijay SinghÆs profile on LinkedIn, a professional community of 1 billion members.
+[08/27/26 19:45:41] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+[08/27/26 19:45:43] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+      LinkedIn: https://www.linkedin.com/in/ranvijay-singh-169030ab/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Ranvijay Singh | None
+      Headline: Ranvijay Singh and Mr. Atul Singh. A proud moment celebrating strong partnerships and the handover of the powerful CAT 322. Thank you for your continued trust in Gainwell CAT as we build a stronger tomorrow together. #GainwellCAT #CustomerDay #CAT322 #BuildingIndia #PartnershipsThatPerform ... Rural Market Coverage is Key for sustainable growth in CE Industry. Well done my Team of Uttar Pradesh #gainwell #rural #Caterpillar #cat #Ballia Construction Times #excon #bauma
+      LinkedIn: https://www.linkedin.com/in/ranvijay-singh-0694b119/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Ranvijay Singh | None
+      Headline: I am a highly experienced IT professional with over 16 years of experience in end-to-endà ╖ Experience: CVS Health ╖ Education: Air Force School Allahabad ╖ Location: King of Prussia ╖ 500+ connections on LinkedIn. View Ranvijay SinghÆs profile on LinkedIn, a professional community of 1 billion members.
+      LinkedIn: https://www.linkedin.com/in/ranvijay-singh-61912510/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Ranvijay Singh | Senior Manager at Genpact India Private Limited ╖ Faridabad ╖ Connect ╖ Freelance
+      Headline: Senior Manager at Genpact India Private Limited ╖ Faridabad ╖ Connect ╖ Freelance - Supply Chain Management ╖ Uttar Pradesh, India ╖ Connect ╖ Expert Supply Chain Manager | SAP &amp; ERP Specialist | Proven Leader in Logistics &amp; Inventory Management | Global Supply Chain MBA @ Brunel University ╖
+      LinkedIn: https://www.linkedin.com/in/ranvijay-singh-46391358/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Prof. Ran Vijay Singh | None
+      Headline: His top skills include Enviornmental Engg.,Waste water treatment, and management, Ground water quality,Enviornmental Science,Policy,Impact &amp; Planning,He is a <strong>specialist for low cost housing, drinking water and sanitation</strong>.I recommend Dr.RanVijay ...
+      LinkedIn: https://www.linkedin.com/in/prof-ran-vijay-singh-a1a76339/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Dr. Ranvijay Singh | Experience: Crystal Crop Protection Limited ╖ Education: SVP University of Agriculture &amp; Technology Meerut ╖ Location: Saharanpur ╖ 176 connections on LinkedIn. View Æs profile on LinkedIn, a professional community of 1 billion members.
+      Headline: Experience: Crystal Crop Protection Limited ╖ Education: SVP University of Agriculture &amp; Technology Meerut ╖ Location: Saharanpur ╖ 176 connections on LinkedIn. View Dr. Ranvijay SinghÆs profile on LinkedIn, a professional community of 1 billion members.
+      LinkedIn: https://www.linkedin.com/in/dr-ranvijay-singh-24b02173/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Ranvijay Singh | None
+      Headline: Experience: Freelance, self-employed ╖ Education: Makhanlal Chaturvedi National University of Journalism and Communication, Bhopal ╖ Location: Lucknow ╖ 48 connections on LinkedIn. View Ranvijay SinghÆs profile on LinkedIn, a professional community of 1 billion members.
+      LinkedIn: https://www.linkedin.com/in/ranvijay-singh-335b21194/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Ranvijay Singh | None
+      Headline: Experience: Nav Bharat Times ╖ Education: University of Lucknow ╖ Location: Lucknow ╖ 166 connections on LinkedIn. View Ranvijay SinghÆs profile on LinkedIn, a professional community of 1 billion members.
+      LinkedIn: https://www.linkedin.com/in/ranvijay-singh-66385a44/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Ranvijay Singh | None
+      Headline: ╖ Join now to see all activity ... 2019 - Jan 2019 1 month ╖ Delhi, India ╖ Jun 2017 - Jul 2017 2 months ╖ <strong>Saharanpur, Uttar Pradesh, India</strong> ╖...
+      LinkedIn: https://www.linkedin.com/in/ranvijay-singh-3a2885273/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Ranvijay Singh | Years S M foods pvt. Ltd. Sales Officerà ╖ Experience: ADITI FOODS (INDIA) PVT. LTD. ╖ Education: Veer Bahadur Singh Purvanchal University, Jaunpur ╖ Location: Nashik ╖ 155 connections on LinkedIn. View Æs profile on LinkedIn, a professional ...
+      Headline: Experience 20 Years FMCG Market 3 - Years S M foods pvt. Ltd. Sales Officerà ╖ Experience: ADITI FOODS (INDIA) PVT. LTD. ╖ Education: Veer Bahadur Singh Purvanchal University, Jaunpur ╖ Location: Nashik ╖ 155 connections on LinkedIn. View Ranvijay SinghÆs profile on LinkedIn, a professional ...
+      LinkedIn: https://www.linkedin.com/in/ranvijay-singh-310681265/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+
+------------------------------
+Signal 14/22
+Company: Orimark Properties
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\Orimark_Properties\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\Orimark_Properties\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "Orimark Properties" "Janpath" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 0 people
+[EXECUTIVE DISCOVERY] No people discovered from any source.
+[EXECUTIVE DISCOVERY] Unique discovered people: 0
+
+Executives found: 0
+
+------------------------------
+Signal 15/22
+Company: AdBeets
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\AdBeets\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\AdBeets\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "AdBeets" "Hyderabad" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 8 people
+[EXECUTIVE DISCOVERY] Unique discovered people: 8
+[EXECUTIVE DISCOVERY] Keeping 8 broader web-discovered candidate(s) for review.
+
+Executives found: 8
+  [3] Kandala Shiva Ram Reddy | None
+      Headline: ╖ Experience: AdBeets ╖ Education: Jawaharlal Nehru Technological University ╖ Location: Hyderabad ╖ 500+ connections on LinkedIn. View <strong>Kandala Shiva Ram Reddy</strong>Æs profile on LinkedIn, a professional ...
+      LinkedIn: https://www.linkedin.com/in/kandala-shiva-ram-reddy-32b16172/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Revanth kumar | None
+      Headline: ╖ Experience: AdBeets ╖ Education: M S Ramaiah Institute of Management ╖ Location: Hyderabad ╖ 333 connections on LinkedIn. View <strong>Revanth kumar</strong>Æs profile on LinkedIn, a professional community of 1 billion members.
+      LinkedIn: https://www.linkedin.com/in/revanth-kumar-b29404170/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Saryu Guntuboina | Business Development Associate at AdBeets
+      Headline: ╖ Experience: AdBeets ╖ Education: GITAM Deemed University ╖ Location: Hyderabad ╖ 169 connections on LinkedIn. View <strong>Saryu Guntuboina</strong>Æs profile on LinkedIn, a professional community of 1 billion members.
+      LinkedIn: https://www.linkedin.com/in/saryu-guntuboina-6a425425a/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+[08/27/26 19:45:45] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+[08/27/26 19:45:48] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+  [3] Rajeev Reddy | IÆm eager to pay that experience forward by mentoring the next generation of aspiring pilots. To all the mentors, peers, and family who have supported me during this transition, thank you! The journey is far from over, but today, IÆm taking a moment to appreciate how far weÆve come. Onward and upward! ?? #DFW #flighttraining #aviation #CFI ... We are delighted to onboard students from IBS Hyderabad and Christ University, Bangalore as Business Development Associates at AdBeets.
+      Headline: IÆm eager to pay that experience forward by mentoring the next generation of aspiring pilots. To all the mentors, peers, and family who have supported me during this transition, thank you! The journey is far from over, but today, IÆm taking a moment to appreciate how far weÆve come. Onward and upward! ?? #DFW #flighttraining #aviation #CFI ... We are delighted to onboard students from IBS Hyderabad and Christ University, Bangalore as Business Development Associates at AdBeets.
+      LinkedIn: https://www.linkedin.com/in/rajeev-reddy-b8231916b/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Shivam T. | None
+      Headline: Hyderabad ╖ View Profile ╖ Keyur Shrimali ╖ Credin ╖ 4K followers ╖ Gandhinagar ╖ View Profile ╖ Karthik S ╖ Wipro ╖ 10K followers ╖ Chennai ╖ View Profile ╖ Sneha Thakur ╖ Deloitte ╖ 4K followers ╖ Pune Division ╖ View Profile ╖ Sai Ganesh ╖ VARITE INC ╖ 4K followers ╖ Bengaluru ╖ View Profile ╖ Tanya Singh ╖ AMS ╖ 6K followers ╖ New Delhi ╖ View Profile ╖ Divyashree S ╖ AdBeets ╖
+      LinkedIn: https://www.linkedin.com/in/shivam-tiwari-16769b16a/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Joel Victor | Marketing Operations manager, General marketing operations, Amazon India ╖ Chennai ╖ Hyderabad ╖ Business Development Associate at AdBeets
+      Headline: Marketing Operations manager, General marketing operations, Amazon India ╖ Chennai ╖ Hyderabad ╖ Business Development Associate at AdBeets | Former Sales &amp; Marketing Associate at Travelers Mind | Christ University | Stock Market Trader &amp; Investor | Entrepreneur | Bengaluru ╖
+      LinkedIn: https://www.linkedin.com/in/joel-victor-a29402254/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Pallavi N | A warm welcome to Pranuthi Putla, who joins our team as Senior Business Development Manager! ? Excited to have her on board and looking forward to a successful journey together. Wishing her a great start at AdBeets!
+      Headline: A warm welcome to Pranuthi Putla, who joins our team as Senior Business Development Manager! ? Excited to have her on board and looking forward to a successful journey together. Wishing her a great start at AdBeets!
+      LinkedIn: https://www.linkedin.com/in/nimmala-pallavi/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Sneha Winchu | None
+      Headline: AdBeets ╖ 13K followers ╖ Bengaluru ╖ View Profile ╖ ilakiyakkumar Dhandapani ╖ VIVA USA INC ╖ 1K followers ╖ Coimbatore ╖ View Profile ╖ Dhamodharan Muthugopal ╖ Salem Infotech ╖ 2K followers ╖ Chennai ╖ View Profile ╖ Vijay Rana LION ╖ Freelance Recruiter ╖ 2K followers ╖ Vadodara ╖ View Profile ╖ Grace Thangaraj ╖
+      LinkedIn: https://www.linkedin.com/in/sneha-winchu-02aa69153/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+
+------------------------------
+Signal 16/22
+Company: Fincore
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\Fincore\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\Fincore\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "Fincore" "Mumbai" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 4 people
+[EXECUTIVE DISCOVERY] Unique discovered people: 4
+[EXECUTIVE DISCOVERY] Keeping 4 broader web-discovered candidate(s) for review.
+
+Executives found: 4
+  [3] Nilesh Bhate | ? Looking for Grade-A office space in Airoli? We have flexible floor plates ready for immediate occupancy. Whether you need a fully furnished plug-and-play setup for a quick team expansion or a large bare-shell floor plate to design your corporate headquarters, Fincore Workspaces has options ranging from 3,000 SF to 33,000+ SF. ? Why move your business here? ? Strategic Navi Mumbai location with top-tier connectivity ? Ideal for IT/ITeS, BFSI, Consulting &amp; Corporate Back-Offices ? Flexible setup options (Furnished, Bare Shell &amp; Warm Shell) ? Need a custom floor plan or site visit?
+      Headline: ? Looking for Grade-A office space in Airoli? We have flexible floor plates ready for immediate occupancy. Whether you need a fully furnished plug-and-play setup for a quick team expansion or a large bare-shell floor plate to design your corporate headquarters, Fincore Workspaces has options ranging from 3,000 SF to 33,000+ SF. ? Why move your business here? ? Strategic Navi Mumbai location with top-tier connectivity ? Ideal for IT/ITeS, BFSI, Consulting &amp; Corporate Back-Offices ? Flexible setup options (Furnished, Bare Shell &amp; Warm Shell) ? Need a custom floor plan or site visit?
+      LinkedIn: https://www.linkedin.com/in/nilesh-bhate-0750871a/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Pranav Sathish | Once you start matching your CV to what the job post actually wants, your response rate changes instantly. If you&#x27;re serious about breaking into finance, stop sending generic applications ù start sending intentional ones. Follow FINCORE for clear, skill-first guidance on building a career in finance.
+      Headline: Once you start matching your CV to what the job post actually wants, your response rate changes instantly. If you&#x27;re serious about breaking into finance, stop sending generic applications ù start sending intentional ones. Follow FINCORE for clear, skill-first guidance on building a career in finance.
+      LinkedIn: https://www.linkedin.com/in/pranav-sathish-cima305/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Anoushka Kumar | Once you start matching your CV to what the job post actually wants, your response rate changes instantly. If you&#x27;re serious about breaking into finance, stop sending generic applications ù start sending intentional ones. Follow FINCORE for clear, skill-first guidance on building a career in finance.
+      Headline: Once you start matching your CV to what the job post actually wants, your response rate changes instantly. If you&#x27;re serious about breaking into finance, stop sending generic applications ù start sending intentional ones. Follow FINCORE for clear, skill-first guidance on building a career in finance.
+      LinkedIn: https://www.linkedin.com/in/anoushka-kumar-751717102/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Vikraman Raman | Sukumar C G ╖ INTERAKT DIGITAL SOLUTIONS PRIVATE LIMITED ╖ 757 followers ╖ Hyderabad ╖ View Profile ╖ Lakshmi Satyavarpu ╖ Fincore Infotech Pvt Ltd ╖ 2K followers ╖ Mumbai ╖ View Profile ╖ Sanmitra Trivedi ╖ Gentoro Talent Solutions LLC ╖ 14K followers ╖
+      Headline: Sukumar C G ╖ INTERAKT DIGITAL SOLUTIONS PRIVATE LIMITED ╖ 757 followers ╖ Hyderabad ╖ View Profile ╖ Lakshmi Satyavarpu ╖ Fincore Infotech Pvt Ltd ╖ 2K followers ╖ Mumbai ╖ View Profile ╖ Sanmitra Trivedi ╖ Gentoro Talent Solutions LLC ╖ 14K followers ╖
+      LinkedIn: https://www.linkedin.com/in/vikraman-raman-5a5b3619/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+
+------------------------------
+Signal 17/22
+Company: Renisa Ventures
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\Renisa_Ventures\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\Renisa_Ventures\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "Renisa Ventures" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 3 people
+[EXECUTIVE DISCOVERY] Unique discovered people: 3
+[EXECUTIVE DISCOVERY] Keeping 3 broader web-discovered candidate(s) for review.
+
+Executives found: 3
+[08/27/26 19:45:50] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+[08/27/26 19:45:52] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+[08/27/26 19:45:54] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+[08/27/26 19:45:56] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+[08/27/26 19:45:58] WARNING  Invalid arguments for tool          server.py:1325
+                             'search_people': [{'type':                        
+                             'unexpected_keyword_argument',                    
+                             'loc': ('max_pages',), 'msg':                     
+                             'Unexpected keyword argument',                    
+                             'input': 2}]                                      
+  [3] Abhishek Chowdhury | None
+      Headline: Renisa Ventures ╖ 19K followers ╖ Mumbai ╖ View Profile ╖ Dharmender Atwal ╖ Cube Stop ╖ 6K followers ╖ Greater Delhi Area ╖ View Profile ╖ Rushina Shah ╖ Zen Diamond India ╖ 21K followers ╖ Mumbai ╖ View Profile ╖ Pankaj singh ╖ V-Mart Retail Ltd.
+      LinkedIn: https://www.linkedin.com/in/abhishek-chowdhury-a403a5a1/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Revanshi Bhatia | None
+      Headline: Gurgaon ╖ View Profile ╖ Sanjay Anand ╖ Renisa Ventures ╖ 19K followers ╖ Mumbai ╖ View Profile ╖ Rohin Gupta ╖ VEGROW ╖ 13K followers ╖ Bengaluru ╖ View Profile ╖ Shivani Dihuliya ╖ Bark.com ╖ 10K followers ╖ Bengaluru ╖ View Profile ╖ Megha Chavda ╖
+      LinkedIn: https://www.linkedin.com/in/revanshibhatia/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Jignesh BARFIWALA | None
+      Headline: Get introduced ╖ Contact Jignesh directly Join to view full profile ╖ <strong>Sanjay Anand</strong> ╖ Renisa Ventures ╖ 19K followers ╖ Mumbai ╖ View Profile ╖ Vinay Hinge ╖ VH Consulting ╖ 10K followers ╖ Mumbai Metropolitan Region ╖ View Profile ...
+      LinkedIn: https://www.linkedin.com/in/jigneshbarfiwala/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+
+------------------------------
+Signal 18/22
+Company: Shree Sai Estate
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\Shree_Sai_Estate\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\Shree_Sai_Estate\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "Shree Sai Estate" "Jaipur" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 2 people
+[EXECUTIVE DISCOVERY] Unique discovered people: 2
+[EXECUTIVE DISCOVERY] Keeping 2 broader web-discovered candidate(s) for review.
+
+Executives found: 2
+  [3] shree sai real estate | Real Estate Agent
+      Headline: Real Estate Agent at Shree sai real estate ╖ Experience: Shree sai real estate ╖ Location: 400030. View shree sai real estateÆs profile on LinkedIn, a professional community of 1 billion members.
+      LinkedIn: https://www.linkedin.com/in/shree-sai-real-estate-4ba240216/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+  [3] Munikrishnappa K | None
+      Headline: shree sai estate ╖ Jaipur ╖ View Profile ╖ Amitabh Roy ╖ Team Taurus ╖ 8K followers ╖ Kolkata ╖ View Profile Show more profiles ╖ Show fewer profiles ╖ Homes &amp; Buildings Media Networks ╖ 2K followers ╖ GoaÆs residential market is witnessing a structural shift as buyers adopt an investment-first approach.
+      LinkedIn: https://www.linkedin.com/in/munikrishnappa-k-28ba4a37/
+      Matched title: ai_review_fallback
+      Confidence: 0.35
+      Source: google_xray
+
+------------------------------
+Signal 19/22
+Company: Jaipur Plot Flat Villa
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\Jaipur_Plot_Flat_Villa\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\Jaipur_Plot_Flat_Villa\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "Jaipur Plot Flat Villa" "Jaipur" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 0 people
+[EXECUTIVE DISCOVERY] No people discovered from any source.
+[EXECUTIVE DISCOVERY] Unique discovered people: 0
+
+Executives found: 0
+
+------------------------------
+Signal 20/22
+Company: Business Sales
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\Business_Sales\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\Business_Sales\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "Business Sales" "Islamabad" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 0 people
+[EXECUTIVE DISCOVERY] No people discovered from any source.
+[EXECUTIVE DISCOVERY] Unique discovered people: 0
+
+Executives found: 0
+
+------------------------------
+Signal 21/22
+Company: Houseelves Kitchen
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\Houseelves_Kitchen\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\Houseelves_Kitchen\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "Houseelves Kitchen" "Kolkata" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 0 people
+[EXECUTIVE DISCOVERY] No people discovered from any source.
+[EXECUTIVE DISCOVERY] Unique discovered people: 0
+
+Executives found: 0
+
+------------------------------
+Signal 22/22
+Company: Iconiq One Realty
+Signal: commercial_property_requirement
+
+[DEBUG] Capturing raw LinkedIn response...
+[DEBUG] LinkedIn raw response written to: tests\output\raw_discovery\Iconiq_One_Realty\linkedin_raw.json
+[DEBUG] Capturing raw X-Ray response...
+[DEBUG] X-Ray raw response written to: tests\output\raw_discovery\Iconiq_One_Realty\xray_raw.json
+[EXECUTIVE DISCOVERY] X-Ray search via BraveSearchService: !g site:linkedin.com/in/ "Iconiq One Realty" "Mount Lavinia or Rathmalana" -intitle:"profiles"
+[EXECUTIVE DISCOVERY] X-Ray returned 0 people
+[EXECUTIVE DISCOVERY] No people discovered from any source.
+[EXECUTIVE DISCOVERY] Unique discovered people: 0
+
+Executives found: 0
+
+==============================
+EXECUTIVE DISCOVERY COMPLETE
+==============================
+Output written to: tests\output\executive_discovery.json
+
+Closing LinkedIn MCP...
+Closed.

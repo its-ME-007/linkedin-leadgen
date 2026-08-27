@@ -798,9 +798,42 @@ class ExecutiveDiscoveryService:
                 "web-discovered candidate(s) for review."
             )
 
-        return self._deduplicate_people(
+        final_results = self._deduplicate_people(
             [*candidates, *fallback_candidates]
         )
+
+        # If no executives found, return the post author as fallback
+        if not final_results:
+            print(
+                "[EXECUTIVE DISCOVERY] "
+                "No executives found. Returning post author as fallback."
+            )
+            
+            # Get author info from the signal (if available)
+            # We need to access the raw post data to get author details
+            # For now, return a placeholder that indicates we need author data
+            author_name = signal.get("_author_name")
+            author_url = signal.get("_author_url")
+            
+            if author_name and author_url:
+                return [
+                    {
+                        "name": author_name,
+                        "role": None,
+                        "headline": f"Post Author: {author_name}",
+                        "linkedin_url": author_url,
+                        "company_name": company,
+                        "location": location,
+                        "tier": 4,
+                        "matched_role": "Post Author",
+                        "matched_title": "author_fallback",
+                        "reason": "No executives found. Returning post author.",
+                        "confidence": 0.4,
+                        "source": "linkedin_post_author",
+                    }
+                ]
+        
+        return final_results
 
     # ================================================================
     # ROLE HELPERS

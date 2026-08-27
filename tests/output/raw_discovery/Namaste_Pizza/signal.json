@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "Namaste Pizza",
+    "location": "Goa",
+    "actor_type": "DIRECT_OCCUPIER",
+    "intent": "active",
+    "recency": null,
+    "confidence": 0.9,
+    "status": "qualified",
+    "evidence": {
+        "text": "We are looking for prime retail properties in Goa for upcoming store expansion.",
+        "reason": "The post explicitly states a requirement for retail space for store expansion."
+    },
+    "source": "linkedin",
+    "source_url": "/in/sumit9991/",
+    "discovery_query": "#PropertyRequirement",
+    "_author_name": "Sumit Pratap S.",
+    "_author_url": "/in/sumit9991/"
+}

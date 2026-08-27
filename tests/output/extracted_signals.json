@@ -1,21 +1,21 @@
 {
-    "input_result_count": 31,
-    "retained_signal_count": 22,
-    "qualified_signal_count": 22,
+    "input_result_count": 35,
+    "retained_signal_count": 16,
+    "qualified_signal_count": 16,
     "needs_enrichment_count": 0,
     "signals": [
         {
             "signal_type": "commercial_property_requirement",
             "company_name": "Namaste Pizza",
             "location": "Goa",
-            "actor_type": "DIRECT_OCCUPIER",
+            "actor_type": "UNKNOWN",
             "intent": "active",
             "recency": null,
             "confidence": 0.9,
             "status": "qualified",
             "evidence": {
                 "text": "We are looking for prime retail properties in Goa for upcoming store expansion.",
-                "reason": "The post explicitly states a requirement for retail space for store expansion."
+                "reason": "The post explicitly states a requirement for retail space for store expansion, though the company name is not disclosed."
             },
             "source": "linkedin",
             "source_url": "/in/sumit9991/",
@@ -24,7 +24,7 @@
         {
             "signal_type": "commercial_property_requirement",
             "company_name": "# Sathiyaraj",
-            "location": "Chennai",
+            "location": "East Coast Road (ECR), Chennai",
             "actor_type": "BROKER_CLIENT_REQUIREMENT",
             "intent": "active",
             "recency": null,
@@ -32,7 +32,7 @@
             "status": "qualified",
             "evidence": {
                 "text": "A Reputed International Hotel Chain is actively seeking to acquire a premium beachfront land parcel on East Coast Road (ECR), Chennai",
-                "reason": "A broker is representing a client seeking commercial property for a hotel development."
+                "reason": "A broker is representing a client (hotel chain) seeking property for development."
             },
             "source": "linkedin",
             "source_url": "/in/sathiya-raj-84308b3a5/",
@@ -57,36 +57,19 @@
         },
         {
             "signal_type": "commercial_property_requirement",
-            "company_name": "Rob Andrasz",
-            "location": "London, Essex, Surrey",
+            "company_name": "Loganathan sambandham",
+            "location": "Karanodai, Cholavaram, Red Hills, Chennai",
             "actor_type": "DIRECT_OCCUPIER",
             "intent": "active",
             "recency": null,
-            "confidence": 0.8,
+            "confidence": 1.0,
             "status": "qualified",
             "evidence": {
-                "text": "We’re currently looking to work with landlords... who have suitable properties available across London, Essex, Surrey",
-                "reason": "The entity is seeking properties for commercial lease arrangements."
+                "text": "I am looking to purchase a new individual house in Chennai North and nearby areas.",
+                "reason": "The individual is seeking a property for purchase."
             },
             "source": "linkedin",
-            "source_url": "/in/rob-andrasz-35b336326/",
-            "discovery_query": "#PropertyWanted"
-        },
-        {
-            "signal_type": "commercial_property_requirement",
-            "company_name": "Guaranteed Rent Company",
-            "location": "Thurrock, Basildon, Southend, Havering, Brentwood",
-            "actor_type": "DIRECT_OCCUPIER",
-            "intent": "active",
-            "recency": null,
-            "confidence": 0.9,
-            "status": "qualified",
-            "evidence": {
-                "text": "At Guaranteed Rent Company, we're actively looking for... Selected commercial properties",
-                "reason": "The company is explicitly seeking commercial properties for their business model."
-            },
-            "source": "linkedin",
-            "source_url": "/company/ecouniverseltd/",
+            "source_url": "/in/loganathan-businessoperations/",
             "discovery_query": "#PropertyWanted"
         },
         {
@@ -96,32 +79,15 @@
             "actor_type": "BROKER_CLIENT_REQUIREMENT",
             "intent": "active",
             "recency": null,
-            "confidence": 0.9,
+            "confidence": 1.0,
             "status": "qualified",
             "evidence": {
                 "text": "Seeking 75,000–10,00,000 SQFT standalone commercial property across Hyderabad’s strategic IT Corridor",
-                "reason": "A clear, urgent requirement for a large commercial building."
+                "reason": "A broker is posting a direct acquisition mandate for a client."
             },
             "source": "linkedin",
             "source_url": "/in/sethghanshyam-yadav-bb3aa5159/",
             "discovery_query": "#CommercialProperty"
-        },
-        {
-            "signal_type": "commercial_property_requirement",
-            "company_name": "HMCC Real Estate Services",
-            "location": "Karachi",
-            "actor_type": "BROKER_CLIENT_REQUIREMENT",
-            "intent": "active",
-            "recency": null,
-            "confidence": 0.9,
-            "status": "qualified",
-            "evidence": {
-                "text": "HMCC Real Estate Services is currently seeking residential properties meeting the following criteria",
-                "reason": "The broker is seeking properties for clients."
-            },
-            "source": "linkedin",
-            "source_url": "/company/hmccestate/",
-            "discovery_query": "#PropertyRequired"
         },
         {
             "signal_type": "commercial_property_requirement",
@@ -130,10 +96,10 @@
             "actor_type": "BROKER_CLIENT_REQUIREMENT",
             "intent": "active",
             "recency": null,
-            "confidence": 0.9,
+            "confidence": 1.0,
             "status": "qualified",
             "evidence": {
-                "text": "Our current requirements include: - Hypermarket Space... - Cafe Space... - Large Format Retail... - Land Parcels",
+                "text": "Our current requirements include: Hypermarket Space... Cafe Space... Large Format Retail... Land Parcels",
                 "reason": "The post lists specific space requirements for various brands."
             },
             "source": "linkedin",
@@ -147,11 +113,11 @@
             "actor_type": "DIRECT_OCCUPIER",
             "intent": "active",
             "recency": null,
-            "confidence": 0.9,
+            "confidence": 1.0,
             "status": "qualified",
             "evidence": {
                 "text": "We are currently looking for an 8,000 sq. ft. warehouse in Indore",
-                "reason": "A direct requirement for warehouse space."
+                "reason": "The entity is directly seeking warehouse space for their operations."
             },
             "source": "linkedin",
             "source_url": "/in/pankaj-agarwal-4b9b7110/",
@@ -160,15 +126,15 @@
         {
             "signal_type": "commercial_property_requirement",
             "company_name": "harsh homes",
-            "location": "Mumbai",
+            "location": "Bandra West, Khar West, Mumbai",
             "actor_type": "BROKER_CLIENT_REQUIREMENT",
             "intent": "active",
             "recency": null,
-            "confidence": 0.9,
+            "confidence": 1.0,
             "status": "qualified",
             "evidence": {
-                "text": "REQUIRED ON RENT FOR CAFE – BANDRA WEST / KHAR WEST",
-                "reason": "A specific requirement for cafe space."
+                "text": "For a popular upcoming cafe brand looking for the perfect space to grow!!!",
+                "reason": "A broker is seeking space for a cafe brand."
             },
             "source": "linkedin",
             "source_url": "/in/ganesh-diwakar-4b053572/",
@@ -181,11 +147,11 @@
             "actor_type": "DIRECT_OCCUPIER",
             "intent": "active",
             "recency": null,
-            "confidence": 0.9,
+            "confidence": 1.0,
             "status": "qualified",
             "evidence": {
                 "text": "We are exploring premium commercial properties in Jhansi for our upcoming Chaiलीला Café outlet",
-                "reason": "A direct expansion requirement for a cafe."
+                "reason": "The company is directly seeking space for their own expansion."
             },
             "source": "linkedin",
             "source_url": "/in/rajatsadh11/",
@@ -198,11 +164,11 @@
             "actor_type": "BROKER_CLIENT_REQUIREMENT",
             "intent": "active",
             "recency": null,
-            "confidence": 0.9,
+            "confidence": 1.0,
             "status": "qualified",
             "evidence": {
                 "text": "We are partnering with a startup client that is actively seeking retail space of 6,000–7,500 sq. ft.",
-                "reason": "A broker representing a client seeking retail space."
+                "reason": "The author is a broker seeking space for a startup client."
             },
             "source": "linkedin",
             "source_url": "/in/shivanshi-awasthi-a78b4a1b7/",
@@ -218,29 +184,12 @@
             "confidence": 0.9,
             "status": "qualified",
             "evidence": {
-                "text": "We are partnering with a startup client that is actively seeking retail space of 6,000–7,500 sq. ft.",
-                "reason": "Duplicate of candidate 16, broker representing a client."
+                "text": "We are partnering with a startup client that is actively seeking retail space of 6,000–7,500 sq. ft. to support their upcoming business expansion in Uttar pradesh.",
+                "reason": "The post explicitly states a client is actively seeking retail space for expansion."
             },
             "source": "linkedin",
             "source_url": "/in/ranvijay-singh-909b40177/",
             "discovery_query": "#SpaceRequirement"
-        },
-        {
-            "signal_type": "commercial_property_requirement",
-            "company_name": "Orimark Properties",
-            "location": "Janpath",
-            "actor_type": "BROKER_CLIENT_REQUIREMENT",
-            "intent": "active",
-            "recency": null,
-            "confidence": 0.9,
-            "status": "qualified",
-            "evidence": {
-                "text": "This requirement is for 5,000 sq. ft. at Janpath",
-                "reason": "A broker representing a bank's office space requirement."
-            },
-            "source": "linkedin",
-            "source_url": "/company/orimarkproperties/",
-            "discovery_query": "#OfficeSpaceRequirement"
         },
         {
             "signal_type": "commercial_property_requirement",
@@ -252,8 +201,8 @@
             "confidence": 1.0,
             "status": "qualified",
             "evidence": {
-                "text": "We’ve reached that stage at AdBeets where our ideas don’t fit inside our current walls anymore... I’m searching for a space",
-                "reason": "The company is actively searching for a new office space to accommodate growth."
+                "text": "I’m searching for a space that says: “This is where a growing team builds big things.”",
+                "reason": "The company is directly searching for office space for their own expansion."
             },
             "source": "linkedin",
             "source_url": "/in/sowmya-erothu-39926917b/",
@@ -270,27 +219,10 @@
             "status": "qualified",
             "evidence": {
                 "text": "We are immediately looking to lease a Pre-Leased Commercial Office Building to support our next phase of growth.",
-                "reason": "The company is explicitly stating a requirement for a commercial office building."
+                "reason": "The company is directly seeking office space for their own expansion."
             },
             "source": "linkedin",
             "source_url": "/in/jr1980/",
-            "discovery_query": "#CommercialSpaceRequirement"
-        },
-        {
-            "signal_type": "commercial_property_requirement",
-            "company_name": "Renisa Ventures",
-            "location": null,
-            "actor_type": "BROKER_CLIENT_REQUIREMENT",
-            "intent": "active",
-            "recency": null,
-            "confidence": 1.0,
-            "status": "qualified",
-            "evidence": {
-                "text": "Looking out for a commercial space/office space for one of our Corporate clients",
-                "reason": "A broker is posting a specific requirement on behalf of an unnamed corporate client."
-            },
-            "source": "linkedin",
-            "source_url": "/company/renisa-ventures/",
             "discovery_query": "#CommercialSpaceRequirement"
         },
         {
@@ -300,11 +232,11 @@
             "actor_type": "BROKER_CLIENT_REQUIREMENT",
             "intent": "active",
             "recency": null,
-            "confidence": 1.0,
+            "confidence": 0.9,
             "status": "qualified",
             "evidence": {
                 "text": "We're actively sourcing 1000–1500 sq.ft. of space... for a client",
-                "reason": "A real estate agency is sourcing space for a client."
+                "reason": "A broker is actively sourcing space for a client."
             },
             "source": "linkedin",
             "source_url": "/company/jaipur-shree-sai-estate/",
@@ -317,31 +249,14 @@
             "actor_type": "BROKER_CLIENT_REQUIREMENT",
             "intent": "active",
             "recency": null,
-            "confidence": 1.0,
+            "confidence": 0.9,
             "status": "qualified",
             "evidence": {
                 "text": "We're actively sourcing 1000–1500 sq.ft. of space... for a client",
-                "reason": "Duplicate of candidate 6; a real estate agency is sourcing space for a client."
+                "reason": "A broker is actively sourcing space for a client."
             },
             "source": "linkedin",
             "source_url": "/company/shree-sai-estate-jaipur/",
-            "discovery_query": "#OfficeSpaceWanted"
-        },
-        {
-            "signal_type": "commercial_property_requirement",
-            "company_name": "Business Sales",
-            "location": "Islamabad",
-            "actor_type": "DIRECT_OCCUPIER",
-            "intent": "active",
-            "recency": null,
-            "confidence": 1.0,
-            "status": "qualified",
-            "evidence": {
-                "text": "1000 Sft Office Space Required for Software House",
-                "reason": "A software house is seeking office space."
-            },
-            "source": "linkedin",
-            "source_url": "/in/shah-ayaz-bin-khalifa-8ab372171/",
             "discovery_query": "#OfficeSpaceWanted"
         },
         {
@@ -354,28 +269,11 @@
             "confidence": 1.0,
             "status": "qualified",
             "evidence": {
-                "text": "We are actively scouting for a commercial space on rent in: Hindustan Park, Gariahat, Bhowanipore, Southern Avenue",
-                "reason": "The company is actively scouting for a retail/commercial space."
+                "text": "Now we're ready for the next outlet and we're looking for the right space to grow into.",
+                "reason": "The company is directly seeking retail space for expansion."
             },
             "source": "linkedin",
             "source_url": "/in/rajat-kedia-b8515415a/",
-            "discovery_query": "#CommercialSpaceWanted"
-        },
-        {
-            "signal_type": "commercial_property_requirement",
-            "company_name": "Iconiq One Realty",
-            "location": "Mount Lavinia or Rathmalana",
-            "actor_type": "BROKER_CLIENT_REQUIREMENT",
-            "intent": "active",
-            "recency": null,
-            "confidence": 1.0,
-            "status": "qualified",
-            "evidence": {
-                "text": "WE’RE LOOKING FOR A COMMERCIAL PROPERTY ON LEASE!",
-                "reason": "A real estate agency (Iconiq One Realty) is looking for a property on behalf of a client."
-            },
-            "source": "linkedin",
-            "source_url": "/company/iconiqonerealty/",
             "discovery_query": "#CommercialSpaceWanted"
         }
     ]

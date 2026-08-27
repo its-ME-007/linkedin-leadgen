@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "Jaipur Plot Flat Villa",
+    "location": "Jaipur",
+    "actor_type": "BROKER_CLIENT_REQUIREMENT",
+    "intent": "active",
+    "recency": null,
+    "confidence": 1.0,
+    "status": "qualified",
+    "evidence": {
+        "text": "We're actively sourcing 1000–1500 sq.ft. of space... for a client",
+        "reason": "Duplicate of candidate 6; a real estate agency is sourcing space for a client."
+    },
+    "source": "linkedin",
+    "source_url": "/company/shree-sai-estate-jaipur/",
+    "discovery_query": "#OfficeSpaceWanted",
+    "_author_name": "Jaipur Plot Flat Villa",
+    "_author_url": "/company/shree-sai-estate-jaipur/"
+}

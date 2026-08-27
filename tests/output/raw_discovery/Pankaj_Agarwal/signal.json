@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "Pankaj Agarwal",
+    "location": "Indore",
+    "actor_type": "DIRECT_OCCUPIER",
+    "intent": "active",
+    "recency": null,
+    "confidence": 0.9,
+    "status": "qualified",
+    "evidence": {
+        "text": "We are currently looking for an 8,000 sq. ft. warehouse in Indore",
+        "reason": "A direct requirement for warehouse space."
+    },
+    "source": "linkedin",
+    "source_url": "/in/pankaj-agarwal-4b9b7110/",
+    "discovery_query": "#PropertyRequired",
+    "_author_name": "Pankaj Agarwal",
+    "_author_url": "/in/pankaj-agarwal-4b9b7110/"
+}

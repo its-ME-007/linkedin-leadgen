@@ -1,0 +1,41 @@
+{
+  "pipeline_stages": {
+    "stage_1_discovery": {
+      "input_results": 35,
+      "status": "complete"
+    },
+    "stage_2_signal_extraction": {
+      "input_signals": 16,
+      "qualified_signals": 16,
+      "status": "complete"
+    },
+    "stage_3_executive_discovery": {
+      "input_signal": "Namaste Pizza",
+      "executives_found": 0,
+      "status": "complete"
+    }
+  },
+  "test_signal": {
+    "signal_type": "commercial_property_requirement",
+    "company_name": "Namaste Pizza",
+    "location": "Goa",
+    "actor_type": "BROKER_CLIENT_REQUIREMENT",
+    "intent": "active",
+    "recency": null,
+    "confidence": 0.9,
+    "status": "qualified",
+    "evidence": {
+      "text": "We are looking for prime retail properties in Goa for upcoming store expansion.",
+      "reason": "The post explicitly states a requirement for retail space for an expansion, though the specific company name is not mentioned."
+    },
+    "source": "linkedin",
+    "source_url": "/in/sumit9991/",
+    "discovery_query": "#PropertyRequirement"
+  },
+  "discovered_executives": [],
+  "summary": {
+    "total_qualified_signals": 16,
+    "executives_discovered_sample": 0,
+    "pipeline_status": "SUCCESS (0 executives - valid)"
+  }
+}

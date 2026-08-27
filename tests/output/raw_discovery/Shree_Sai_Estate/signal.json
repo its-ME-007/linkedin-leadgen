@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "Shree Sai Estate",
+    "location": "Jaipur",
+    "actor_type": "BROKER_CLIENT_REQUIREMENT",
+    "intent": "active",
+    "recency": null,
+    "confidence": 1.0,
+    "status": "qualified",
+    "evidence": {
+        "text": "We're actively sourcing 1000–1500 sq.ft. of space... for a client",
+        "reason": "A real estate agency is sourcing space for a client."
+    },
+    "source": "linkedin",
+    "source_url": "/company/jaipur-shree-sai-estate/",
+    "discovery_query": "#OfficeSpaceWanted",
+    "_author_name": "Shree Sai Estate",
+    "_author_url": "/company/jaipur-shree-sai-estate/"
+}

@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "Rajeev Gupta",
+    "location": "Delhi, Gurgaon, Noida, Ghaziabad, Faridabad",
+    "actor_type": "BROKER_CLIENT_REQUIREMENT",
+    "intent": "active",
+    "recency": null,
+    "confidence": 0.9,
+    "status": "qualified",
+    "evidence": {
+        "text": "Our current requirements include: - Hypermarket Space... - Cafe Space... - Large Format Retail... - Land Parcels",
+        "reason": "The post lists specific space requirements for various brands."
+    },
+    "source": "linkedin",
+    "source_url": "/in/rajeev-gupta-56505421/",
+    "discovery_query": "#PropertyRequired",
+    "_author_name": "Rajeev Gupta",
+    "_author_url": "/in/rajeev-gupta-56505421/"
+}

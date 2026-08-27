@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "sethghanshyam yadav",
+    "location": "Hyderabad",
+    "actor_type": "BROKER_CLIENT_REQUIREMENT",
+    "intent": "active",
+    "recency": null,
+    "confidence": 0.9,
+    "status": "qualified",
+    "evidence": {
+        "text": "Seeking 75,000–10,00,000 SQFT standalone commercial property across Hyderabad’s strategic IT Corridor",
+        "reason": "A clear, urgent requirement for a large commercial building."
+    },
+    "source": "linkedin",
+    "source_url": "/in/sethghanshyam-yadav-bb3aa5159/",
+    "discovery_query": "#CommercialProperty",
+    "_author_name": "sethghanshyam yadav",
+    "_author_url": "/in/sethghanshyam-yadav-bb3aa5159/"
+}

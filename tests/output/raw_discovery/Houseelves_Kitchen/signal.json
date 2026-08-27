@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "Houseelves Kitchen",
+    "location": "Kolkata",
+    "actor_type": "DIRECT_OCCUPIER",
+    "intent": "active",
+    "recency": null,
+    "confidence": 1.0,
+    "status": "qualified",
+    "evidence": {
+        "text": "We are actively scouting for a commercial space on rent in: Hindustan Park, Gariahat, Bhowanipore, Southern Avenue",
+        "reason": "The company is actively scouting for a retail/commercial space."
+    },
+    "source": "linkedin",
+    "source_url": "/in/rajat-kedia-b8515415a/",
+    "discovery_query": "#CommercialSpaceWanted",
+    "_author_name": "Rajat Kedia",
+    "_author_url": "/in/rajat-kedia-b8515415a/"
+}

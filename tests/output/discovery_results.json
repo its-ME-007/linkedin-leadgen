@@ -5,7 +5,7 @@
             "commercial_property_requirement"
         ]
     },
-    "result_count": 31,
+    "result_count": 35,
     "results": [
         {
             "source": "linkedin",
@@ -166,6 +166,84 @@
         {
             "source": "linkedin",
             "signal_type": "commercial_property_requirement",
+            "query": "#PropertyWanted",
+            "discovery_query": "#PropertyWanted",
+            "target_location": "Bengaluru",
+            "source_url": "/in/michaelcarrara/",
+            "raw_result": {
+                "references": {
+                    "search_results": [
+                        {
+                            "text": "🏡 VIEWINGS ON A SUNDAY… DOES YOUR AGENT DO THIS? 👀\n\nProperties are selling and buyers are out there including at weekends!\n\nWhen a property is priced right, marketed properly and viewings are made easy, there is still strong demand. 🔥\n\nI’m looking for MORE PROPERTIES to bring to the market across the local area.\n\nThinking of selling?\nAlready on the market but not getting the results you expected?\n\n📲 Get in touch for a FREE, no-obligation valuation.\n\nYour property. My priority. Any day of the week. 🏡💜\n\n#PropertyWanted #SundayViewings #EstateAgent #PropertyForSale #FreeValuation #LeightonBuzzard #Wing #LocalEstateAgent\n\nRussell Humphrey Ethan Fox Katie Bell Nath Thornton Lisa Davies\n… more\n\n5 reactions\n5\n\n1 repost\n1 repost\n\nLike\nComment\nRepost\nSend",
+                            "url": "/in/michaelcarrara/",
+                            "author": "Michael Carrara",
+                            "author_company": null,
+                            "timestamp": null,
+                            "raw": {
+                                "author": "Michael Carrara",
+                                "author_company": null,
+                                "text": "🏡 VIEWINGS ON A SUNDAY… DOES YOUR AGENT DO THIS? 👀\n\nProperties are selling and buyers are out there including at weekends!\n\nWhen a property is priced right, marketed properly and viewings are made easy, there is still strong demand. 🔥\n\nI’m looking for MORE PROPERTIES to bring to the market across the local area.\n\nThinking of selling?\nAlready on the market but not getting the results you expected?\n\n📲 Get in touch for a FREE, no-obligation valuation.\n\nYour property. My priority. Any day of the week. 🏡💜\n\n#PropertyWanted #SundayViewings #EstateAgent #PropertyForSale #FreeValuation #LeightonBuzzard #Wing #LocalEstateAgent\n\nRussell Humphrey Ethan Fox Katie Bell Nath Thornton Lisa Davies\n… more\n\n5 reactions\n5\n\n1 repost\n1 repost\n\nLike\nComment\nRepost\nSend"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "source": "linkedin",
+            "signal_type": "commercial_property_requirement",
+            "query": "#PropertyWanted",
+            "discovery_query": "#PropertyWanted",
+            "target_location": "Bengaluru",
+            "source_url": "/in/loganathan-businessoperations/",
+            "raw_result": {
+                "references": {
+                    "search_results": [
+                        {
+                            "text": "HOUSE WANTED – READY BUYER | KARANODAI / CHOLAVARAM / RED HILLS\nBudget: Up to ₹50 Lakhs | New Individual House | Direct Owners Only\nI am looking to purchase a new individual house in Chennai North and nearby areas.\nPREFERRED LOCATIONS\nKaranodai\nCholavaram\nRed Hills\nNearby suitable locations\nPROPERTY REQUIREMENTS\nNew individual house\nApprox. 1,200 sq.ft. built-up area\nBudget: Up to ₹50 Lakhs\nClear title and legal documentation\nBank loan eligible preferred\nReady for immediate purchase\nIMPORTANT – DIRECT OWNER ONLY\nNo Brokers | No Agents | No Intermediaries\nIf you are a direct owner with a suitable property, please send:\nProperty location\nBuilt-up area\nNumber of bedrooms\nProperty photos\nExpected price\nAvailability for site visit\nSERIOUS BUYER – READY TO PROCEED WITH A SUITABLE PROPERTY\nCONTACT\nS. LOGANATHAN\nMobile / WhatsApp: +91 97102 90443\nOwners with suitable properties can WhatsApp the details directly.\n#HouseWanted #HouseForSale #Karanodai #Cholavaram #RedHills #ChennaiProperty #ChennaiRealEstate #NorthChennai #IndividualHouse #DirectOwner #NoBroker #PropertyWanted #HouseUnder50Lakhs #TamilNaduProperty #ReadyBuyer\n… more\n\nLike\nComment\nRepost\nSend",
+                            "url": "/in/loganathan-businessoperations/",
+                            "author": "Loganathan sambandham",
+                            "author_company": null,
+                            "timestamp": null,
+                            "raw": {
+                                "author": "Loganathan sambandham",
+                                "author_company": null,
+                                "text": "HOUSE WANTED – READY BUYER | KARANODAI / CHOLAVARAM / RED HILLS\nBudget: Up to ₹50 Lakhs | New Individual House | Direct Owners Only\nI am looking to purchase a new individual house in Chennai North and nearby areas.\nPREFERRED LOCATIONS\nKaranodai\nCholavaram\nRed Hills\nNearby suitable locations\nPROPERTY REQUIREMENTS\nNew individual house\nApprox. 1,200 sq.ft. built-up area\nBudget: Up to ₹50 Lakhs\nClear title and legal documentation\nBank loan eligible preferred\nReady for immediate purchase\nIMPORTANT – DIRECT OWNER ONLY\nNo Brokers | No Agents | No Intermediaries\nIf you are a direct owner with a suitable property, please send:\nProperty location\nBuilt-up area\nNumber of bedrooms\nProperty photos\nExpected price\nAvailability for site visit\nSERIOUS BUYER – READY TO PROCEED WITH A SUITABLE PROPERTY\nCONTACT\nS. LOGANATHAN\nMobile / WhatsApp: +91 97102 90443\nOwners with suitable properties can WhatsApp the details directly.\n#HouseWanted #HouseForSale #Karanodai #Cholavaram #RedHills #ChennaiProperty #ChennaiRealEstate #NorthChennai #IndividualHouse #DirectOwner #NoBroker #PropertyWanted #HouseUnder50Lakhs #TamilNaduProperty #ReadyBuyer\n… more\n\nLike\nComment\nRepost\nSend"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "source": "linkedin",
+            "signal_type": "commercial_property_requirement",
+            "query": "#PropertyWanted",
+            "discovery_query": "#PropertyWanted",
+            "target_location": "Bengaluru",
+            "source_url": "/in/yaduvamsi-p-b259191ba/",
+            "raw_result": {
+                "references": {
+                    "search_results": [
+                        {
+                            "text": "🔍 WANTED: SHARING PROPERTIES — VIJAYAWADA\n\nWe have a genuine profile with bank approval and are looking for suitable properties around Vijayawada.\n\n💰 Approved Property Budget: ₹3 Crore ( Valuation must be 5 to 6 Crore)\n👤 Buyer Profile: NRI\n🏦 Bank Approval: Available\n📄 Profile & approval can be shared with genuine property owners / authorized representatives for verification.\n\nSHARING PROPERTY ONLY\n\nThe buyer profile and property owner are separate parties. We are looking to match the approved buyer profile with a suitable property.\n\n🤝 Via Media\n✅ Genuine profile\n✅ Bank-approved buyer\n✅ Trustworthy lead\n✅ Serious transaction\n\nIf you have a suitable property around Vijayawada, DM me:\n\nPROPERTY TYPE + LOCATION + EXTENT + EXPECTED PRICE\n\n📩 Property owners / direct representatives / genuine agents with matching properties only.\n\n---\n\n📍 AMARAVATI | VIJAYAWADA | HYDERABAD\n🤝 BUY • SELL • INVEST • DEVELOP • FINANCE\n📞 Vamsi\nReal Estate Marketing & Finance\n📱 +91 7901014474\n📩 DM me your requirement:\nPROPERTY TYPE + LOCATION + BUDGET + PURPOSE\n\n#VijayawadaRealEstate #VijayawadaProperty #Vijayawada #PropertyWanted #SharingProperty #PropertyBuyers #NRIProperty #NRIRealEstate #NRIInvestment #BankApproved #BankLoan #PropertyLoan #RealEstateInvestment #PropertyInvestment #AndhraPradeshRealEstate #AmaravatiRealEstate #RealEstateIndia #GenuineBuyer #GenuineLead #SeriousBuyer #PropertyOwners #RealEstateAgents #ViaMedia\n… more\n\nLike\nComment\nRepost\nSend",
+                            "url": "/in/yaduvamsi-p-b259191ba/",
+                            "author": "YaduVamsi P.",
+                            "author_company": null,
+                            "timestamp": null,
+                            "raw": {
+                                "author": "YaduVamsi P.",
+                                "author_company": null,
+                                "text": "🔍 WANTED: SHARING PROPERTIES — VIJAYAWADA\n\nWe have a genuine profile with bank approval and are looking for suitable properties around Vijayawada.\n\n💰 Approved Property Budget: ₹3 Crore ( Valuation must be 5 to 6 Crore)\n👤 Buyer Profile: NRI\n🏦 Bank Approval: Available\n📄 Profile & approval can be shared with genuine property owners / authorized representatives for verification.\n\nSHARING PROPERTY ONLY\n\nThe buyer profile and property owner are separate parties. We are looking to match the approved buyer profile with a suitable property.\n\n🤝 Via Media\n✅ Genuine profile\n✅ Bank-approved buyer\n✅ Trustworthy lead\n✅ Serious transaction\n\nIf you have a suitable property around Vijayawada, DM me:\n\nPROPERTY TYPE + LOCATION + EXTENT + EXPECTED PRICE\n\n📩 Property owners / direct representatives / genuine agents with matching properties only.\n\n---\n\n📍 AMARAVATI | VIJAYAWADA | HYDERABAD\n🤝 BUY • SELL • INVEST • DEVELOP • FINANCE\n📞 Vamsi\nReal Estate Marketing & Finance\n📱 +91 7901014474\n📩 DM me your requirement:\nPROPERTY TYPE + LOCATION + BUDGET + PURPOSE\n\n#VijayawadaRealEstate #VijayawadaProperty #Vijayawada #PropertyWanted #SharingProperty #PropertyBuyers #NRIProperty #NRIRealEstate #NRIInvestment #BankApproved #BankLoan #PropertyLoan #RealEstateInvestment #PropertyInvestment #AndhraPradeshRealEstate #AmaravatiRealEstate #RealEstateIndia #GenuineBuyer #GenuineLead #SeriousBuyer #PropertyOwners #RealEstateAgents #ViaMedia\n… more\n\nLike\nComment\nRepost\nSend"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "source": "linkedin",
+            "signal_type": "commercial_property_requirement",
             "query": "#CommercialProperty",
             "discovery_query": "#CommercialProperty",
             "target_location": "Bengaluru",
@@ -221,12 +299,38 @@
             "query": "#CommercialProperty",
             "discovery_query": "#CommercialProperty",
             "target_location": "Bengaluru",
+            "source_url": "/in/zebakhhan/",
+            "raw_result": {
+                "references": {
+                    "search_results": [
+                        {
+                            "text": "YOUR PROPERTY. YOUR OPPORTUNITY.\n\nWe’re working on something new at Proactive Partners.\n\nA digital property platform designed to make it simpler for property owners to market their properties — with greater visibility, relevant enquiries and more control.\n\n✓ Better visibility\n✓ Relevant enquiries\n✓ Greater control\n✓ Less time spent marketing\n✓ No spam\n\nWe’re combining technology with real-world real estate experience to make property marketing simpler, smarter and more effective.\n\nSomething better for property owners is coming soon.\nStay tuned. We’ll be here soon.\n\n#PropertyOwners #RealEstate #MumbaiRealEstate #CommercialProperty #investors\n\n… more\n\nProperty Owner\n\n·\n\n2 pages\n\n15 reactions\n15\n\n4 comments\n4 comments\n\n•\n\n1 repost\n1 repost\n\nLike\nComment\nRepost\nSend",
+                            "url": "/in/zebakhhan/",
+                            "author": "Zeba Khan",
+                            "author_company": null,
+                            "timestamp": null,
+                            "raw": {
+                                "author": "Zeba Khan",
+                                "author_company": null,
+                                "text": "YOUR PROPERTY. YOUR OPPORTUNITY.\n\nWe’re working on something new at Proactive Partners.\n\nA digital property platform designed to make it simpler for property owners to market their properties — with greater visibility, relevant enquiries and more control.\n\n✓ Better visibility\n✓ Relevant enquiries\n✓ Greater control\n✓ Less time spent marketing\n✓ No spam\n\nWe’re combining technology with real-world real estate experience to make property marketing simpler, smarter and more effective.\n\nSomething better for property owners is coming soon.\nStay tuned. We’ll be here soon.\n\n#PropertyOwners #RealEstate #MumbaiRealEstate #CommercialProperty #investors\n\n… more\n\nProperty Owner\n\n·\n\n2 pages\n\n15 reactions\n15\n\n4 comments\n4 comments\n\n•\n\n1 repost\n1 repost\n\nLike\nComment\nRepost\nSend"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "source": "linkedin",
+            "signal_type": "commercial_property_requirement",
+            "query": "#CommercialProperty",
+            "discovery_query": "#CommercialProperty",
+            "target_location": "Bengaluru",
             "source_url": "/in/sagar-associates-0766a0385/",
             "raw_result": {
                 "references": {
                     "search_results": [
                         {
-                            "text": "The Right Property Can Drive Your Business Growth. 🏢📈\nChoosing a commercial property is about more than just location. Look for easy customer access, good roads & parking, and strong future growth potential.\nThe right property isn’t just a space—it’s a foundation for your business success.\n📞 7015800600 | 9613900600\n\nBook your site visit with Sagar Associates today.\n\n#CommercialProperty #BusinessGrowth #PropertyInvestment #RealEstate #SmartInvestment #SagarAssociates\n… more\n\nLike\nComment\nRepost\nSend\n\nAre these results helpful?\n\nYour feedback helps us improve search results",
+                            "text": "The Right Property Can Drive Your Business Growth. 🏢📈\nChoosing a commercial property is about more than just location. Look for easy customer access, good roads & parking, and strong future growth potential.\nThe right property isn’t just a space—it’s a foundation for your business success.\n📞 7015800600 | 9613900600\n\nBook your site visit with Sagar Associates today.\n\n#CommercialProperty #BusinessGrowth #PropertyInvestment #RealEstate #SmartInvestment #SagarAssociates\n… more\n\nLike\nComment\nRepost\nSend",
                             "url": "/in/sagar-associates-0766a0385/",
                             "author": "Sagar Associates",
                             "author_company": "sagarassociates",
@@ -234,7 +338,7 @@
                             "raw": {
                                 "author": "Sagar Associates",
                                 "author_company": "sagarassociates",
-                                "text": "The Right Property Can Drive Your Business Growth. 🏢📈\nChoosing a commercial property is about more than just location. Look for easy customer access, good roads & parking, and strong future growth potential.\nThe right property isn’t just a space—it’s a foundation for your business success.\n📞 7015800600 | 9613900600\n\nBook your site visit with Sagar Associates today.\n\n#CommercialProperty #BusinessGrowth #PropertyInvestment #RealEstate #SmartInvestment #SagarAssociates\n… more\n\nLike\nComment\nRepost\nSend\n\nAre these results helpful?\n\nYour feedback helps us improve search results"
+                                "text": "The Right Property Can Drive Your Business Growth. 🏢📈\nChoosing a commercial property is about more than just location. Look for easy customer access, good roads & parking, and strong future growth potential.\nThe right property isn’t just a space—it’s a foundation for your business success.\n📞 7015800600 | 9613900600\n\nBook your site visit with Sagar Associates today.\n\n#CommercialProperty #BusinessGrowth #PropertyInvestment #RealEstate #SmartInvestment #SagarAssociates\n… more\n\nLike\nComment\nRepost\nSend"
                             }
                         }
                     ]
@@ -330,7 +434,7 @@
                 "references": {
                     "search_results": [
                         {
-                            "text": "📢 Seeking 8,000 sq. ft. fully compliant with fire NOC Warehouse Space in Indore! 🏭\nWe are currently looking for an 8,000 sq. ft. warehouse in Indore (preferably in industrial or logistics zones) for storage and distribution operations.\nIdeal Location Requirements:\n ✅ Easy access to major highways\n ✅ Sufficient loading/unloading space\n ✅ Good connectivity to main transport routes\n ✅ Clear title and ready for immediate occupancy\n📍 Target Area: Indore city & surrounding industrial belts\nIf you have available space or know property owners/brokers with suitable warehouses, please DM at 8800646647 or comment below.\n Happy to discuss details and arrange site visits.\n🔗 Please share/referral welcome!\n#WarehouseSpace #Indore #IndustrialRealEstate #Logistics #PropertyRequired #SupplyChain\n… more\n\n21 reactions\n21\n\n5 comments\n5 comments\n\n•\n\n1 repost\n1 repost\n\nLike\nComment\nRepost\nSend",
+                            "text": "📢 Seeking 8,000 sq. ft. fully compliant with fire NOC Warehouse Space in Indore! 🏭\nWe are currently looking for an 8,000 sq. ft. warehouse in Indore (preferably in industrial or logistics zones) for storage and distribution operations.\nIdeal Location Requirements:\n ✅ Easy access to major highways\n ✅ Sufficient loading/unloading space\n ✅ Good connectivity to main transport routes\n ✅ Clear title and ready for immediate occupancy\n📍 Target Area: Indore city & surrounding industrial belts\nIf you have available space or know property owners/brokers with suitable warehouses, please DM at 8800646647 or comment below.\n Happy to discuss details and arrange site visits.\n🔗 Please share/referral welcome!\n#WarehouseSpace #Indore #IndustrialRealEstate #Logistics #PropertyRequired #SupplyChain\n\n21 reactions\n21\n\n5 comments\n5 comments\n\n•\n\n1 repost\n1 repost\n\nLike\nComment\nRepost\nSend",
                             "url": "/in/pankaj-agarwal-4b9b7110/",
                             "author": "Pankaj Agarwal",
                             "author_company": null,
@@ -338,7 +442,7 @@
                             "raw": {
                                 "author": "Pankaj Agarwal",
                                 "author_company": null,
-                                "text": "📢 Seeking 8,000 sq. ft. fully compliant with fire NOC Warehouse Space in Indore! 🏭\nWe are currently looking for an 8,000 sq. ft. warehouse in Indore (preferably in industrial or logistics zones) for storage and distribution operations.\nIdeal Location Requirements:\n ✅ Easy access to major highways\n ✅ Sufficient loading/unloading space\n ✅ Good connectivity to main transport routes\n ✅ Clear title and ready for immediate occupancy\n📍 Target Area: Indore city & surrounding industrial belts\nIf you have available space or know property owners/brokers with suitable warehouses, please DM at 8800646647 or comment below.\n Happy to discuss details and arrange site visits.\n🔗 Please share/referral welcome!\n#WarehouseSpace #Indore #IndustrialRealEstate #Logistics #PropertyRequired #SupplyChain\n… more\n\n21 reactions\n21\n\n5 comments\n5 comments\n\n•\n\n1 repost\n1 repost\n\nLike\nComment\nRepost\nSend"
+                                "text": "📢 Seeking 8,000 sq. ft. fully compliant with fire NOC Warehouse Space in Indore! 🏭\nWe are currently looking for an 8,000 sq. ft. warehouse in Indore (preferably in industrial or logistics zones) for storage and distribution operations.\nIdeal Location Requirements:\n ✅ Easy access to major highways\n ✅ Sufficient loading/unloading space\n ✅ Good connectivity to main transport routes\n ✅ Clear title and ready for immediate occupancy\n📍 Target Area: Indore city & surrounding industrial belts\nIf you have available space or know property owners/brokers with suitable warehouses, please DM at 8800646647 or comment below.\n Happy to discuss details and arrange site visits.\n🔗 Please share/referral welcome!\n#WarehouseSpace #Indore #IndustrialRealEstate #Logistics #PropertyRequired #SupplyChain\n\n21 reactions\n21\n\n5 comments\n5 comments\n\n•\n\n1 repost\n1 repost\n\nLike\nComment\nRepost\nSend"
                             }
                         }
                     ]
@@ -356,7 +460,7 @@
                 "references": {
                     "search_results": [
                         {
-                            "text": "📣 REQUIRED ON RENT FOR CAFE – BANDRA WEST / KHAR WEST ☕🍽️\n\nFor a popular upcoming cafe brand looking for the perfect space to grow!!!\n\nIf you have a location that fits the criteria below — let’s connect! 👇\n\n🔹 Area Needed: 700 – 1000 sq.ft carpet\n🔹 Otla / Outside Seating: Big advantage\n\n⭐⭐ Preferred Locations:\n• Bandra West\n• Khar West\n• High street areas or good bylanes works\n\n♨️ Cooking: Only Induction\n🔹 Non-Veg Permission: Required\n🔹 Budget: As per ongoing market rates\n\n📞 Call / WhatsApp: 98336 39333\n\n✨ Ideal opportunity for property owners looking for quality long-term tenants!\n\nLet’s create the next favourite cafe destination in town! 🙌\n.\n.\n.\n.\n.\n@highlight \n.\n.\n.\n\n#CafeSpace #CafeForRent #BandraWest #KharWest #CommercialRentals #RetailSpace #MumbaiRealEstate #PropertyRequired #CafeHunt #FoodBusiness #OtlaSeating #InductionCooking #NonVegAllowed #RealEstateMumbai #UpcomingBrand #HighStreetRentals\n… more\n\n1 reaction\n1\n\nLike\nComment\nRepost\nSend",
+                            "text": "📣 REQUIRED ON RENT FOR CAFE – BANDRA WEST / KHAR WEST ☕🍽️\n\nFor a popular upcoming cafe brand looking for the perfect space to grow!!!\n\nIf you have a location that fits the criteria below — let’s connect! 👇\n\n🔹 Area Needed: 700 – 1000 sq.ft carpet\n🔹 Otla / Outside Seating: Big advantage\n\n⭐⭐ Preferred Locations:\n• Bandra West\n• Khar West\n• High street areas or good bylanes works\n\n♨️ Cooking: Only Induction\n🔹 Non-Veg Permission: Required\n🔹 Budget: As per ongoing market rates\n\n📞 Call / WhatsApp: 98336 39333\n\n✨ Ideal opportunity for property owners looking for quality long-term tenants!\n\nLet’s create the next favourite cafe destination in town! 🙌\n.\n.\n.\n.\n.\n@highlight \n.\n.\n.\n\n#CafeSpace #CafeForRent #BandraWest #KharWest #CommercialRentals #RetailSpace #MumbaiRealEstate #PropertyRequired #CafeHunt #FoodBusiness #OtlaSeating #InductionCooking #NonVegAllowed #RealEstateMumbai #UpcomingBrand #HighStreetRentals\n\n1 reaction\n1\n\nLike\nComment\nRepost\nSend",
                             "url": "/in/ganesh-diwakar-4b053572/",
                             "author": "Ganesh Diwakar",
                             "author_company": "harsh homes",
@@ -364,7 +468,7 @@
                             "raw": {
                                 "author": "Ganesh Diwakar",
                                 "author_company": "harsh homes",
-                                "text": "📣 REQUIRED ON RENT FOR CAFE – BANDRA WEST / KHAR WEST ☕🍽️\n\nFor a popular upcoming cafe brand looking for the perfect space to grow!!!\n\nIf you have a location that fits the criteria below — let’s connect! 👇\n\n🔹 Area Needed: 700 – 1000 sq.ft carpet\n🔹 Otla / Outside Seating: Big advantage\n\n⭐⭐ Preferred Locations:\n• Bandra West\n• Khar West\n• High street areas or good bylanes works\n\n♨️ Cooking: Only Induction\n🔹 Non-Veg Permission: Required\n🔹 Budget: As per ongoing market rates\n\n📞 Call / WhatsApp: 98336 39333\n\n✨ Ideal opportunity for property owners looking for quality long-term tenants!\n\nLet’s create the next favourite cafe destination in town! 🙌\n.\n.\n.\n.\n.\n@highlight \n.\n.\n.\n\n#CafeSpace #CafeForRent #BandraWest #KharWest #CommercialRentals #RetailSpace #MumbaiRealEstate #PropertyRequired #CafeHunt #FoodBusiness #OtlaSeating #InductionCooking #NonVegAllowed #RealEstateMumbai #UpcomingBrand #HighStreetRentals\n… more\n\n1 reaction\n1\n\nLike\nComment\nRepost\nSend"
+                                "text": "📣 REQUIRED ON RENT FOR CAFE – BANDRA WEST / KHAR WEST ☕🍽️\n\nFor a popular upcoming cafe brand looking for the perfect space to grow!!!\n\nIf you have a location that fits the criteria below — let’s connect! 👇\n\n🔹 Area Needed: 700 – 1000 sq.ft carpet\n🔹 Otla / Outside Seating: Big advantage\n\n⭐⭐ Preferred Locations:\n• Bandra West\n• Khar West\n• High street areas or good bylanes works\n\n♨️ Cooking: Only Induction\n🔹 Non-Veg Permission: Required\n🔹 Budget: As per ongoing market rates\n\n📞 Call / WhatsApp: 98336 39333\n\n✨ Ideal opportunity for property owners looking for quality long-term tenants!\n\nLet’s create the next favourite cafe destination in town! 🙌\n.\n.\n.\n.\n.\n@highlight \n.\n.\n.\n\n#CafeSpace #CafeForRent #BandraWest #KharWest #CommercialRentals #RetailSpace #MumbaiRealEstate #PropertyRequired #CafeHunt #FoodBusiness #OtlaSeating #InductionCooking #NonVegAllowed #RealEstateMumbai #UpcomingBrand #HighStreetRentals\n\n1 reaction\n1\n\nLike\nComment\nRepost\nSend"
                             }
                         }
                     ]
@@ -382,7 +486,7 @@
                 "references": {
                     "search_results": [
                         {
-                            "text": "📍Looking for Property in Jhansi – Café Location Needed!\n\nWe are exploring premium commercial properties in Jhansi for our upcoming Chaiलीला Café outlet ☕\n\n✅ Area: 1000 – 3000 sq. ft.\n✅ Preference: Ground floor / corner location\n✅ Must have: Good footfall, parking space, indoor–outdoor seating option\n\nIf you have any suitable commercial property or shop available for lease, please connect with us.\nAshwin Sharma\nAmit Sharma\nVibhor Sharma\n📞 Contact: 8319331140\n📧 info@chaileela.com\n🌐 #ChaiLeela #Jhansi #FranchiseExpansion #CafeLocation #PropertyRequired\n… more\n\n10 reactions\n10\n\n1 comment\n1 comment\n\n•\n\n1 repost\n1 repost\n\nLike\nComment\nRepost\nSend",
+                            "text": "📍Looking for Property in Jhansi – Café Location Needed!\n\nWe are exploring premium commercial properties in Jhansi for our upcoming Chaiलीला Café outlet ☕\n\n✅ Area: 1000 – 3000 sq. ft.\n✅ Preference: Ground floor / corner location\n✅ Must have: Good footfall, parking space, indoor–outdoor seating option\n\nIf you have any suitable commercial property or shop available for lease, please connect with us.\nAshwin Sharma\nAmit Sharma\nVibhor Sharma\n📞 Contact: 8319331140\n📧 info@chaileela.com\n🌐 #ChaiLeela #Jhansi #FranchiseExpansion #CafeLocation #PropertyRequired\n\n10 reactions\n10\n\n1 comment\n1 comment\n\n•\n\n1 repost\n1 repost\n\nLike\nComment\nRepost\nSend",
                             "url": "/in/rajatsadh11/",
                             "author": "Rajat Sadh",
                             "author_company": null,
@@ -390,7 +494,7 @@
                             "raw": {
                                 "author": "Rajat Sadh",
                                 "author_company": null,
-                                "text": "📍Looking for Property in Jhansi – Café Location Needed!\n\nWe are exploring premium commercial properties in Jhansi for our upcoming Chaiलीला Café outlet ☕\n\n✅ Area: 1000 – 3000 sq. ft.\n✅ Preference: Ground floor / corner location\n✅ Must have: Good footfall, parking space, indoor–outdoor seating option\n\nIf you have any suitable commercial property or shop available for lease, please connect with us.\nAshwin Sharma\nAmit Sharma\nVibhor Sharma\n📞 Contact: 8319331140\n📧 info@chaileela.com\n🌐 #ChaiLeela #Jhansi #FranchiseExpansion #CafeLocation #PropertyRequired\n… more\n\n10 reactions\n10\n\n1 comment\n1 comment\n\n•\n\n1 repost\n1 repost\n\nLike\nComment\nRepost\nSend"
+                                "text": "📍Looking for Property in Jhansi – Café Location Needed!\n\nWe are exploring premium commercial properties in Jhansi for our upcoming Chaiलीला Café outlet ☕\n\n✅ Area: 1000 – 3000 sq. ft.\n✅ Preference: Ground floor / corner location\n✅ Must have: Good footfall, parking space, indoor–outdoor seating option\n\nIf you have any suitable commercial property or shop available for lease, please connect with us.\nAshwin Sharma\nAmit Sharma\nVibhor Sharma\n📞 Contact: 8319331140\n📧 info@chaileela.com\n🌐 #ChaiLeela #Jhansi #FranchiseExpansion #CafeLocation #PropertyRequired\n\n10 reactions\n10\n\n1 comment\n1 comment\n\n•\n\n1 repost\n1 repost\n\nLike\nComment\nRepost\nSend"
                             }
                         }
                     ]

@@ -30,7 +30,7 @@ class SignalExtractor:
     deterministic filtering is performed before the API call.
     """
 
-    DEFAULT_MODEL = "gemini-2.0-flash-lite"
+    DEFAULT_MODEL = "gemini-3.1-flash-lite"
     DEFAULT_BATCH_SIZE = 4
 
     # ----------------------------------------
@@ -268,9 +268,53 @@ class SignalExtractor:
         # Step 5: Deduplicate
         # ----------------------------------------
 
-        return self._deduplicate(
-            signals
+        # ----------------------------------------
+        # Step 5.5: Filter to India-only locations
+        # ----------------------------------------
+
+        india_signals = [
+            s for s in signals
+            if self._is_india_location(s.get('location'))
+        ]
+
+        print(
+            f'[SIGNAL EXTRACTION] '
+            f'Filtered to India-only: '
+            f'{len(india_signals)}/{len(signals)} signals'
         )
+
+        # ----------------------------------------
+        # Step 6: Deduplicate
+        # ----------------------------------------
+
+        return self._deduplicate(
+            india_signals
+        )
+    # ----------------------------------------
+    # India-only location filtering
+    # ----------------------------------------
+
+    @staticmethod
+    def _is_india_location(location_str):
+        """Check if location string is India-based."""
+        if not location_str:
+            return False
+        
+        india_keywords = [
+            'india', 'delhi', 'mumbai', 'bangalore', 'hyderabad', 'pune', 'chennai',
+            'kolkata', 'goa', 'gurgaon', 'noida', 'gurugram', 'thane', 'jaipur',
+            'indore', 'chandigarh', 'lucknow', 'ahmedabad', 'surat', 'vadodara',
+            'bhopal', 'nagpur', 'coimbatore', 'kochi', 'bhubaneswar', 'navi mumbai',
+            'faridabad', 'ghaziabad', 'uttar pradesh', 'maharashtra', 'karnataka',
+            'tamil nadu', 'telangana', 'andhra pradesh', 'west bengal', 'rajasthan',
+            'madhya pradesh', 'uttarakhand', 'punjab', 'haryana', 'kerala', 'odisha',
+            'assam', 'tripura', 'manipur', 'meghalaya', 'nagaland', 'mizoram',
+            'jharkhand', 'chhattisgarh', 'himachal pradesh', 'jammu', 'kashmir',
+            'ladakh', 'puducherry', 'dadra', 'daman', 'diu', 'lakshadweep', 'jhansi'
+        ]
+        
+        location_lower = location_str.lower()
+        return any(keyword in location_lower for keyword in india_keywords)
 
     # ----------------------------------------
     # Candidate post extraction
@@ -1386,3 +1430,4 @@ Analyze the following candidate business signals.
             enriched.append(signal)
 
         return enriched
+

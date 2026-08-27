@@ -1,0 +1,19 @@
+{
+    "signal_type": "commercial_property_requirement",
+    "company_name": "Shivanshi Awasthi",
+    "location": "Uttar Pradesh",
+    "actor_type": "BROKER_CLIENT_REQUIREMENT",
+    "intent": "active",
+    "recency": null,
+    "confidence": 0.9,
+    "status": "qualified",
+    "evidence": {
+        "text": "We are partnering with a startup client that is actively seeking retail space of 6,000–7,500 sq. ft.",
+        "reason": "A broker representing a client seeking retail space."
+    },
+    "source": "linkedin",
+    "source_url": "/in/shivanshi-awasthi-a78b4a1b7/",
+    "discovery_query": "#SpaceRequirement",
+    "_author_name": "Shivanshi Awasthi",
+    "_author_url": "/in/shivanshi-awasthi-a78b4a1b7/"
+}
